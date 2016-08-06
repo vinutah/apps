@@ -1,0 +1,11 @@
+instruction_name,file_name,line_no,is_vector
+"  %25 = sext i32 %0 to i64",,,0
+"  %relidx_ = sub i64 %27# %phidx_53",,,0
+"  %relidx_100 = sub i64 %27# %phidx_93",,,0
+"  %28 = mul nsw i64 %27# %25",,,0
+"  %relidx_104 = sub i64 %30# %phidx_35",,,0
+"  %33 = add nsw i64 %30# %28",,,0
+"  %relidx_102 = sub i64 %33# %phidx_15",,,0
+"  %relidx_106 = sub i64 %30# %phidx_75",,,0
+"  %42 = add nuw nsw i64 %30# 1",,,0
+"  %46 = add nuw nsw i64 %27# 1",,,0

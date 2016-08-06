@@ -1,0 +1,7 @@
+instruction_name,file_name,line_no,is_vector
+"  %9 = trunc i64 %6 to i32",,,0
+"  %10 = shl i32 %9# 1",,,0
+"  %11 = add nsw i32 %10# -2",,,0
+"  %12 = sext i32 %11 to i64",,,0
+"  %relidx_ = sub i64 %12# %phidx_",,,0
+"  %13 = add nuw nsw i64 %6# 1",,,0

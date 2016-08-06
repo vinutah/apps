@@ -1,0 +1,5 @@
+digraph "CFG for '_Z11printParamsv' function" {
+	label="CFG for '_Z11printParamsv' function";
+
+	Node0x3162af0 [shape=record,label="{%0:\l  ret void\l}"];
+}

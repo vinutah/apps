@@ -1,0 +1,10 @@
+digraph "CFG for '_Z7flipBitPvj8DataType6FIAlgo' function" {
+	label="CFG for '_Z7flipBitPvj8DataType6FIAlgo' function";
+
+	Node0x314f270 [shape=record,label="{%4:\l  %5 = alloca i64, align 8\l  %6 = bitcast i64* %5 to i8*\l  call void @llvm.lifetime.start(i64 8, i8* %6)\l  store i64 0, i64* %5, align 8\l  %7 = icmp eq i32 %2, 0\l  br i1 %7, label %11, label %8\l|{<s0>T|<s1>F}}"];
+	Node0x314f270:s0 -> Node0x314f310;
+	Node0x314f270:s1 -> Node0x314f2c0;
+	Node0x314f2c0 [shape=record,label="{%8:\l\l  %9 = tail call i32 @_Z9getBitPosj8DataType6FIAlgo(i32 %1, i32 %2, i32 %3)\l  %10 = sext i32 %9 to i64\l  br label %11\l}"];
+	Node0x314f2c0 -> Node0x314f310;
+	Node0x314f310 [shape=record,label="{%11:\l\l  %12 = phi i64 [ %10, %8 ], [ 0, %4 ]\l  %13 = zext i32 %1 to i64\l  call void @llvm.memcpy.p0i8.p0i8.i64(i8* %6, i8* %0, i64 %13, i32 1, i1\l... false)\l  %14 = load i64, i64* %5, align 8\l  %15 = shl i64 1, %12\l  %16 = and i64 %14, %15\l  %17 = icmp eq i64 %16, 0\l  %18 = or i64 %14, %15\l  %19 = xor i64 %15, -1\l  %20 = and i64 %14, %19\l  %21 = select i1 %17, i64 %18, i64 %20\l  store i64 %21, i64* %5, align 8\l  call void @llvm.memcpy.p0i8.p0i8.i64(i8* %0, i8* %6, i64 %13, i32 1, i1\l... false)\l  %22 = trunc i64 %12 to i32\l  call void @llvm.lifetime.end(i64 8, i8* %6)\l  ret i32 %22\l}"];
+}

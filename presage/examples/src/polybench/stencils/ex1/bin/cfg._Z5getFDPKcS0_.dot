@@ -1,0 +1,9 @@
+digraph "CFG for '_Z5getFDPKcS0_' function" {
+	label="CFG for '_Z5getFDPKcS0_' function";
+
+	Node0x31455e0 [shape=record,label="{%2:\l  %3 = tail call %struct._IO_FILE* @fopen(i8* %0, i8* %1)\l  %4 = icmp eq %struct._IO_FILE* %3, null\l  br i1 %4, label %5, label %7\l|{<s0>T|<s1>F}}"];
+	Node0x31455e0:s0 -> Node0x3145630;
+	Node0x31455e0:s1 -> Node0x3145680;
+	Node0x3145630 [shape=record,label="{%5:\l\l  %6 = tail call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([34 x i8],\l... [34 x i8]* @.str.10, i64 0, i64 0), i8* %0)\l  tail call void @exit(i32 -1) #11\l  unreachable\l}"];
+	Node0x3145680 [shape=record,label="{%7:\l\l  ret %struct._IO_FILE* %3\l}"];
+}

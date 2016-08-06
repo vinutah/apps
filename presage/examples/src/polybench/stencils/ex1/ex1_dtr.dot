@@ -1,0 +1,10 @@
+digraph "CFG for 'ex1' function" {
+
+	Node0x2f10b30 [shape=record,label="{%2:\l  %3 = icmp sgt i32 %1, 1\l  br i1 %3, label %5, label %4\l|{<s0>T|<s1>F}}"];
+	Node0x2f10b30:s0 -> Node0x2f10bd0;
+	Node0x2f10b30:s1 -> Node0x2f10b80;
+	Node0x2f10b80 [shape=record,label="{%4:\l\l  %GEP_obsrvd = phi double* [ %newgep_, %5 ], [ %0, %2 ]\l  %phidx_2 = phi i64 [ %12, %5 ], [ 0, %2 ]\l  %GEP_duplct = getelementptr double, double* %0, i64 %phidx_2\l  %castadr1 = ptrtoint double* %GEP_obsrvd to i64\l  %castadr2 = ptrtoint double* %GEP_duplct to i64\l  %cmpopdet = icmp ne i64 %castadr1, %castadr2\l  %newstatus = zext i1 %cmpopdet to i64\l  %oldstatus = load i64, i64* @detectCounter\l  %updatestatus_new = or i64 %updatestatus, %oldstatus\l  store i64 %updatestatus_new, i64* @detectCounter\l  ret void\l}"];
+	Node0x2f10bd0 [shape=record,label="{%5:\l\l  %6 = phi i64 [ %13, %5 ], [ 1, %2 ]\l  %phibase_ = phi double* [ %0, %2 ], [ %newgep_, %5 ]\l  %phidx_ = phi i64 [ 0, %2 ], [ %12, %5 ]\l  %7 = trunc i64 %6 to i32\l  %8 = sitofp i32 %7 to double\l  %9 = trunc i64 %6 to i32\l  %10 = shl i32 %9, 1\l  %11 = add nsw i32 %10, -2\l  %12 = sext i32 %11 to i64\l  %relidx_ = sub i64 %12, %phidx_\l  %newgep_ = getelementptr double, double* %phibase_, i64 %relidx_\l  store double %8, double* %newgep_, align 8, !tbaa !1\l  %13 = add nuw nsw i64 %6, 1\l  %14 = trunc i64 %13 to i32\l  %15 = icmp eq i32 %14, %1\l  br i1 %15, label %4, label %5\l|{<s0>T|<s1>F}}"];
+	Node0x2f10bd0:s0 -> Node0x2f10b80;
+	Node0x2f10bd0:s1 -> Node0x2f10bd0;
+}

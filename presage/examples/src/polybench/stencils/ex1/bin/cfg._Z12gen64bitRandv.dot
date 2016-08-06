@@ -1,0 +1,10 @@
+digraph "CFG for '_Z12gen64bitRandv' function" {
+	label="CFG for '_Z12gen64bitRandv' function";
+
+	Node0x3164ad0 [shape=record,label="{%0:\l  br label %1\l}"];
+	Node0x3164ad0 -> Node0x3164b20;
+	Node0x3164b20 [shape=record,label="{%1:\l\l  %2 = phi i32 [ 0, %0 ], [ %9, %1 ]\l  %3 = phi i64 [ 0, %0 ], [ %8, %1 ]\l  %4 = tail call i32 @rand() #6\l  %5 = and i32 %4, 1\l  %6 = zext i32 %5 to i64\l  %7 = or i64 %6, %3\l  %8 = shl i64 %7, 1\l  %9 = add nuw nsw i32 %2, 1\l  %10 = icmp eq i32 %9, 64\l  br i1 %10, label %11, label %1\l|{<s0>T|<s1>F}}"];
+	Node0x3164b20:s0 -> Node0x3164b70;
+	Node0x3164b20:s1 -> Node0x3164b20;
+	Node0x3164b70 [shape=record,label="{%11:\l\l  ret i64 %8\l}"];
+}

@@ -1,0 +1,24 @@
+digraph "CFG for '_Z22injectSoftErrorIntTy16sPKcs' function" {
+	label="CFG for '_Z22injectSoftErrorIntTy16sPKcs' function";
+
+	Node0x3153a60 [shape=record,label="{%3:\l  %4 = alloca i16, align 2\l  %5 = alloca i16, align 2\l  %6 = alloca i16, align 2\l  %7 = alloca i32, align 4\l  store i16 %0, i16* %4, align 2, !tbaa !1\l  store i16 %2, i16* %5, align 2, !tbaa !1\l  %8 = load i32, i32* @fidatardflag, align 4, !tbaa !5\l  %9 = icmp eq i32 %8, 0\l  br i1 %9, label %10, label %11\l|{<s0>T|<s1>F}}"];
+	Node0x3153a60:s0 -> Node0x3153ab0;
+	Node0x3153a60:s1 -> Node0x3153b00;
+	Node0x3153ab0 [shape=record,label="{%10:\l\l  tail call void @_Z14updateFIParamsv()\l  br label %11\l}"];
+	Node0x3153ab0 -> Node0x3153b00;
+	Node0x3153b00 [shape=record,label="{%11:\l\l  %12 = bitcast i16* %6 to i8*\l  call void @llvm.lifetime.start(i64 2, i8* %12) #6\l  %13 = load i16, i16* %4, align 2, !tbaa !1\l  store i16 %13, i16* %6, align 2, !tbaa !1\l  %14 = bitcast i32* %7 to i8*\l  call void @llvm.lifetime.start(i64 4, i8* %14) #6\l  store i32 -1, i32* %7, align 4, !tbaa !5\l  %15 = bitcast i16* %5 to i8*\l  %16 = call i32 @_Z9checkMaskPvi(i8* %15, i32 2)\l  %17 = icmp eq i32 %16, 0\l  br i1 %17, label %34, label %18\l|{<s0>T|<s1>F}}"];
+	Node0x3153b00:s0 -> Node0x3153c90;
+	Node0x3153b00:s1 -> Node0x3153b50;
+	Node0x3153b50 [shape=record,label="{%18:\l\l  %19 = load i64, i64* @fsIntTy16, align 8, !tbaa !7\l  %20 = add nsw i64 %19, 1\l  store i64 %20, i64* @fsIntTy16, align 8, !tbaa !7\l  %21 = load i32, i32* @pfs, align 4, !tbaa !5\l  %22 = icmp eq i32 %21, 1\l  br i1 %22, label %34, label %23\l|{<s0>T|<s1>F}}"];
+	Node0x3153b50:s0 -> Node0x3153c90;
+	Node0x3153b50:s1 -> Node0x3153ba0;
+	Node0x3153ba0 [shape=record,label="{%23:\l\l  %24 = call i32 @_Z13matchDynFSIdxv()\l  %25 = icmp eq i32 %24, 0\l  br i1 %25, label %34, label %26\l|{<s0>T|<s1>F}}"];
+	Node0x3153ba0:s0 -> Node0x3153c90;
+	Node0x3153ba0:s1 -> Node0x3153bf0;
+	Node0x3153bf0 [shape=record,label="{%26:\l\l  %27 = bitcast i16* %4 to i8*\l  %28 = load i32, i32* @fialg, align 4, !tbaa !9\l  %29 = call i32 @_Z7flipBitPvj8DataType6FIAlgo(i8* %27, i32 2, i32 2, i32 %28)\l  store i32 %29, i32* %7, align 4, !tbaa !5\l  %30 = icmp sgt i32 %29, -1\l  br i1 %30, label %31, label %34\l|{<s0>T|<s1>F}}"];
+	Node0x3153bf0:s0 -> Node0x3153c40;
+	Node0x3153bf0:s1 -> Node0x3153c90;
+	Node0x3153c40 [shape=record,label="{%31:\l\l  %32 = load i64, i64* @fiIntTy16, align 8, !tbaa !7\l  %33 = add nsw i64 %32, 1\l  store i64 %33, i64* @fiIntTy16, align 8, !tbaa !7\l  call void @_Z11writeFIDataPKcPvS1_S1_8DataTypeS0_(i8* %1, i8* %12, i8* %27,\l... i8* nonnull %14, i32 2, i8* getelementptr inbounds ([2 x i8], [2 x i8]*\l... @.str.9, i64 0, i64 0))\l  br label %34\l}"];
+	Node0x3153c40 -> Node0x3153c90;
+	Node0x3153c90 [shape=record,label="{%34:\l\l  %35 = load i16, i16* %4, align 2, !tbaa !1\l  call void @llvm.lifetime.end(i64 4, i8* %14) #6\l  call void @llvm.lifetime.end(i64 2, i8* %12) #6\l  ret i16 %35\l}"];
+}

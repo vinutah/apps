@@ -1,0 +1,10 @@
+digraph "CFG for '_Z11file_existsPKc' function" {
+	label="CFG for '_Z11file_existsPKc' function";
+
+	Node0x314e850 [shape=record,label="{%1:\l  %2 = tail call %struct._IO_FILE* @fopen(i8* %0, i8* getelementptr inbounds\l... ([2 x i8], [2 x i8]* @.str.11, i64 0, i64 0))\l  %3 = icmp eq %struct._IO_FILE* %2, null\l  br i1 %3, label %6, label %4\l|{<s0>T|<s1>F}}"];
+	Node0x314e850:s0 -> Node0x314e8f0;
+	Node0x314e850:s1 -> Node0x314e8a0;
+	Node0x314e8a0 [shape=record,label="{%4:\l\l  %5 = tail call i32 @fclose(%struct._IO_FILE* nonnull %2)\l  br label %6\l}"];
+	Node0x314e8a0 -> Node0x314e8f0;
+	Node0x314e8f0 [shape=record,label="{%6:\l\l  %7 = phi i32 [ 1, %4 ], [ 0, %1 ]\l  ret i32 %7\l}"];
+}

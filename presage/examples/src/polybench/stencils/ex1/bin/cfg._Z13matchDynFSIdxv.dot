@@ -1,0 +1,22 @@
+digraph "CFG for '_Z13matchDynFSIdxv' function" {
+	label="CFG for '_Z13matchDynFSIdxv' function";
+
+	Node0x3144b80 [shape=record,label="{%0:\l  %1 = load i64, i64* @dynFSCounter, align 8, !tbaa !1\l  %2 = add nsw i64 %1, 1\l  store i64 %2, i64* @dynFSCounter, align 8, !tbaa !1\l  %3 = tail call i32 @_Z14getIntervalIdxx(i64 %2)\l  %4 = icmp slt i32 %3, 0\l  br i1 %4, label %28, label %5\l|{<s0>T|<s1>F}}"];
+	Node0x3144b80:s0 -> Node0x3144d60;
+	Node0x3144b80:s1 -> Node0x3144bd0;
+	Node0x3144bd0 [shape=record,label="{%5:\l\l  %6 = sext i32 %3 to i64\l  %7 = load i64, i64* @intvCount, align 8, !tbaa !1\l  %8 = icmp slt i64 %6, %7\l  br i1 %8, label %9, label %28\l|{<s0>T|<s1>F}}"];
+	Node0x3144bd0:s0 -> Node0x3144c20;
+	Node0x3144bd0:s1 -> Node0x3144d60;
+	Node0x3144c20 [shape=record,label="{%9:\l\l  %10 = load i64, i64* @ef, align 8, !tbaa !1\l  %11 = icmp sgt i64 %10, 0\l  br i1 %11, label %12, label %28\l|{<s0>T|<s1>F}}"];
+	Node0x3144c20:s0 -> Node0x3144c70;
+	Node0x3144c20:s1 -> Node0x3144d60;
+	Node0x3144c70 [shape=record,label="{%12:\l\l  %13 = mul nsw i64 %10, %6\l  %14 = load i64*, i64** @dynFSIdx, align 8, !tbaa !5\l  %15 = load i64, i64* @dynFSCounter, align 8, !tbaa !1\l  %16 = load i64, i64* @ef, align 8\l  %17 = shl i64 %13, 32\l  %18 = ashr exact i64 %17, 32\l  br label %21\l}"];
+	Node0x3144c70 -> Node0x3144d10;
+	Node0x3144cc0 [shape=record,label="{%19:\l\l  %20 = icmp slt i64 %27, %16\l  br i1 %20, label %21, label %28\l|{<s0>T|<s1>F}}"];
+	Node0x3144cc0:s0 -> Node0x3144d10;
+	Node0x3144cc0:s1 -> Node0x3144d60;
+	Node0x3144d10 [shape=record,label="{%21:\l\l  %22 = phi i64 [ 0, %12 ], [ %27, %19 ]\l  %23 = add nsw i64 %22, %18\l  %24 = getelementptr inbounds i64, i64* %14, i64 %23\l  %25 = load i64, i64* %24, align 8, !tbaa !1\l  %26 = icmp eq i64 %25, %15\l  %27 = add nuw nsw i64 %22, 1\l  br i1 %26, label %28, label %19\l|{<s0>T|<s1>F}}"];
+	Node0x3144d10:s0 -> Node0x3144d60;
+	Node0x3144d10:s1 -> Node0x3144cc0;
+	Node0x3144d60 [shape=record,label="{%28:\l\l  %29 = phi i32 [ 0, %5 ], [ 0, %0 ], [ 0, %9 ], [ 0, %19 ], [ 1, %21 ]\l  ret i32 %29\l}"];
+}

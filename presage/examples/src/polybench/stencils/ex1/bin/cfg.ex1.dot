@@ -1,0 +1,11 @@
+digraph "CFG for 'ex1' function" {
+	label="CFG for 'ex1' function";
+
+	Node0x317ca40 [shape=record,label="{%2:\l  %3 = icmp sgt i32 %1, 1\l  br i1 %3, label %5, label %4\l|{<s0>T|<s1>F}}"];
+	Node0x317ca40:s0 -> Node0x317cae0;
+	Node0x317ca40:s1 -> Node0x317ca90;
+	Node0x317ca90 [shape=record,label="{%4:\l\l  ret void\l}"];
+	Node0x317cae0 [shape=record,label="{%5:\l\l  %6 = phi i64 [ %14, %5 ], [ 1, %2 ]\l  %7 = trunc i64 %6 to i32\l  %8 = sitofp i32 %7 to double\l  %9 = trunc i64 %6 to i32\l  %10 = shl i32 %9, 1\l  %11 = add nsw i32 %10, -2\l  %12 = sext i32 %11 to i64\l  %13 = getelementptr inbounds double, double* %0, i64 %12\l  store double %8, double* %13, align 8, !tbaa !1\l  %14 = add nuw nsw i64 %6, 1\l  %15 = trunc i64 %14 to i32\l  %16 = icmp eq i32 %15, %1\l  br i1 %16, label %4, label %5\l|{<s0>T|<s1>F}}"];
+	Node0x317cae0:s0 -> Node0x317ca90;
+	Node0x317cae0:s1 -> Node0x317cae0;
+}

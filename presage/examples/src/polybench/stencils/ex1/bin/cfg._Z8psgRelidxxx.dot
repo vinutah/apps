@@ -1,0 +1,10 @@
+digraph "CFG for '_Z8psgRelidxxx' function" {
+	label="CFG for '_Z8psgRelidxxx' function";
+
+	Node0x3178d50 [shape=record,label="{%3:\l  %4 = icmp eq i64 %1, %2\l  br i1 %4, label %7, label %5\l|{<s0>T|<s1>F}}"];
+	Node0x3178d50:s0 -> Node0x3178df0;
+	Node0x3178d50:s1 -> Node0x3178da0;
+	Node0x3178da0 [shape=record,label="{%5:\l\l  %6 = tail call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([78 x i8],\l... [78 x i8]* @.str.48, i64 0, i64 0), i64 %0, i64 %1, i64 %2)\l  br label %7\l}"];
+	Node0x3178da0 -> Node0x3178df0;
+	Node0x3178df0 [shape=record,label="{%7:\l\l  ret void\l}"];
+}

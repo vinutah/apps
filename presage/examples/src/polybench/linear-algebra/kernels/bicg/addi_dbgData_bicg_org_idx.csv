@@ -1,0 +1,16 @@
+instruction_name,file_name,line_no,is_vector
+"  %25 = sext i32 %0 to i64",,,0
+"  %30 = mul nsw i64 %27# %25",,,0
+"  %36 = add nsw i64 %32# %30",,,0
+"  %47 = add nuw nsw i64 %32# 1",,,0
+"  %51 = add nuw nsw i64 %27# 1",,,0
+"  %25 = sext i32 %0 to i64",,,0
+"  %30 = mul nsw i64 %27# %25",,,0
+"  %36 = add nsw i64 %32# %30",,,0
+"  %47 = add nuw nsw i64 %32# 1",,,0
+"  %51 = add nuw nsw i64 %27# 1",,,0
+"  %25 = sext i32 %0 to i64",,,0
+"  %30 = mul nsw i64 %27# %25",,,0
+"  %36 = add nsw i64 %32# %30",,,0
+"  %47 = add nuw nsw i64 %32# 1",,,0
+"  %51 = add nuw nsw i64 %27# 1",,,0

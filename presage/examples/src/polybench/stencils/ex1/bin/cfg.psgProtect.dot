@@ -1,0 +1,5 @@
+digraph "CFG for 'psgProtect' function" {
+	label="CFG for 'psgProtect' function";
+
+	Node0x31782d0 [shape=record,label="{%3:\l  ret void\l}"];
+}

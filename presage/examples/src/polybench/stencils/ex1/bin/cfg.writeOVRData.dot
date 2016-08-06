@@ -1,0 +1,12 @@
+digraph "CFG for 'writeOVRData' function" {
+	label="CFG for 'writeOVRData' function";
+
+	Node0x3160e30 [shape=record,label="{%3:\l  %4 = icmp eq i32 %2, 0\l  br i1 %4, label %7, label %5\l|{<s0>T|<s1>F}}"];
+	Node0x3160e30:s0 -> Node0x3160ed0;
+	Node0x3160e30:s1 -> Node0x3160e80;
+	Node0x3160e80 [shape=record,label="{%5:\l\l  %6 = tail call %struct._IO_FILE* @fopen(i8* %0, i8* getelementptr inbounds\l... ([2 x i8], [2 x i8]* @.str.12, i64 0, i64 0))\l  br label %9\l}"];
+	Node0x3160e80 -> Node0x3160f20;
+	Node0x3160ed0 [shape=record,label="{%7:\l\l  %8 = tail call %struct._IO_FILE* @fopen(i8* %0, i8* getelementptr inbounds\l... ([2 x i8], [2 x i8]* @.str.1.13, i64 0, i64 0))\l  br label %9\l}"];
+	Node0x3160ed0 -> Node0x3160f20;
+	Node0x3160f20 [shape=record,label="{%9:\l\l  %10 = phi %struct._IO_FILE* [ %6, %5 ], [ %8, %7 ]\l  %11 = tail call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE*\l... %10, i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str.3.15, i64 0, i64\l... 0), double %1)\l  %12 = tail call i32 @fclose(%struct._IO_FILE* %10)\l  ret void\l}"];
+}

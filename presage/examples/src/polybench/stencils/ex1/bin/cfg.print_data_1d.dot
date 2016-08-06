@@ -1,0 +1,18 @@
+digraph "CFG for 'print_data_1d' function" {
+	label="CFG for 'print_data_1d' function";
+
+	Node0x31776d0 [shape=record,label="{%4:\l  %5 = icmp eq i32 %3, 0\l  br i1 %5, label %8, label %6\l|{<s0>T|<s1>F}}"];
+	Node0x31776d0:s0 -> Node0x3177770;
+	Node0x31776d0:s1 -> Node0x3177720;
+	Node0x3177720 [shape=record,label="{%6:\l\l  %7 = tail call %struct._IO_FILE* @fopen(i8* %2, i8* getelementptr inbounds\l... ([2 x i8], [2 x i8]* @.str.12, i64 0, i64 0))\l  br label %10\l}"];
+	Node0x3177720 -> Node0x31777c0;
+	Node0x3177770 [shape=record,label="{%8:\l\l  %9 = tail call %struct._IO_FILE* @fopen(i8* %2, i8* getelementptr inbounds\l... ([2 x i8], [2 x i8]* @.str.1.13, i64 0, i64 0))\l  br label %10\l}"];
+	Node0x3177770 -> Node0x31777c0;
+	Node0x31777c0 [shape=record,label="{%10:\l\l  %11 = phi %struct._IO_FILE* [ %7, %6 ], [ %9, %8 ]\l  %12 = icmp sgt i32 %0, 0\l  br i1 %12, label %13, label %21\l|{<s0>T|<s1>F}}"];
+	Node0x31777c0:s0 -> Node0x3177810;
+	Node0x31777c0:s1 -> Node0x3177860;
+	Node0x3177810 [shape=record,label="{%13:\l\l  %14 = phi i64 [ %18, %13 ], [ 0, %10 ]\l  %15 = getelementptr inbounds double, double* %1, i64 %14\l  %16 = load double, double* %15, align 8, !tbaa !1\l  %17 = tail call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE*\l... %11, i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.4.16, i64 0, i64\l... 0), double %16)\l  %18 = add nuw nsw i64 %14, 1\l  %19 = trunc i64 %18 to i32\l  %20 = icmp eq i32 %19, %0\l  br i1 %20, label %21, label %13\l|{<s0>T|<s1>F}}"];
+	Node0x3177810:s0 -> Node0x3177860;
+	Node0x3177810:s1 -> Node0x3177810;
+	Node0x3177860 [shape=record,label="{%21:\l\l  %22 = tail call i32 @fclose(%struct._IO_FILE* %11)\l  ret void\l}"];
+}

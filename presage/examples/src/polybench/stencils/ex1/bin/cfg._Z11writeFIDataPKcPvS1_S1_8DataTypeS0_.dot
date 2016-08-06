@@ -1,0 +1,48 @@
+digraph "CFG for '_Z11writeFIDataPKcPvS1_S1_8DataTypeS0_' function" {
+	label="CFG for '_Z11writeFIDataPKcPvS1_S1_8DataTypeS0_' function";
+
+	Node0x3150300 [shape=record,label="{%6:\l  %7 = alloca [1024 x i8], align 16\l  %8 = load i8*, i8** @fiStat, align 8, !tbaa !1\l  %9 = tail call %struct._IO_FILE* @_Z5getFDPKcS0_(i8* %8, i8* %5)\l  %10 = getelementptr inbounds [1024 x i8], [1024 x i8]* %7, i64 0, i64 0\l  call void @llvm.lifetime.start(i64 1024, i8* %10) #6\l  %11 = tail call i64 @strlen(i8* %0) #11\l  %12 = icmp eq i32 %4, 7\l  br i1 %12, label %13, label %15\l|{<s0>T|<s1>F}}"];
+	Node0x3150300:s0 -> Node0x3150350;
+	Node0x3150300:s1 -> Node0x31503a0;
+	Node0x3150350 [shape=record,label="{%13:\l\l  %14 = tail call i64 @fwrite(i8* getelementptr inbounds ([6 x i8], [6 x i8]*\l... @.str.49, i64 0, i64 0), i64 5, i64 1, %struct._IO_FILE* %9)\l  br label %18\l}"];
+	Node0x3150350 -> Node0x31503f0;
+	Node0x31503a0 [shape=record,label="{%15:\l\l  %16 = load i64, i64* @execKey, align 8, !tbaa !5\l  %17 = tail call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE*\l... %9, i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.50, i64 0, i64 0),\l... i64 %16)\l  br label %18\l}"];
+	Node0x31503a0 -> Node0x31503f0;
+	Node0x31503f0 [shape=record,label="{%18:\l\l  %19 = bitcast [1024 x i8]* %7 to i16*\l  store i16 34, i16* %19, align 16\l  %20 = getelementptr inbounds [1024 x i8], [1024 x i8]* %7, i64 0, i64 1\l  %21 = and i64 %11, 4294967295\l  %22 = call i8* @strncpy(i8* %20, i8* %0, i64 %21) #6\l  %23 = getelementptr inbounds [1024 x i8], [1024 x i8]* %7, i64 0, i64 %21\l  %24 = bitcast i8* %23 to i16*\l  store i16 34, i16* %24, align 1\l  %25 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.53, i64 0, i64 0), i8*\l... %10)\l  %26 = or i32 %4, 2\l  %27 = icmp eq i32 %26, 2\l  %28 = icmp eq i32 %4, 3\l  %29 = or i1 %28, %27\l  br i1 %29, label %30, label %37\l|{<s0>T|<s1>F}}"];
+	Node0x31503f0:s0 -> Node0x3150440;
+	Node0x31503f0:s1 -> Node0x3150490;
+	Node0x3150440 [shape=record,label="{%30:\l\l  %31 = bitcast i8* %1 to i32*\l  %32 = load i32, i32* %31, align 4, !tbaa !7\l  %33 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.54, i64 0, i64 0), i32\l... %32)\l  %34 = bitcast i8* %2 to i32*\l  %35 = load i32, i32* %34, align 4, !tbaa !7\l  %36 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.54, i64 0, i64 0), i32\l... %35)\l  br label %72\l}"];
+	Node0x3150440 -> Node0x31506c0;
+	Node0x3150490 [shape=record,label="{%37:\l\l  switch i32 %4, label %68 [\l    i32 1, label %38\l    i32 4, label %45\l    i32 5, label %52\l    i32 6, label %61\l  ]\l|{<s0>def|<s1>1|<s2>4|<s3>5|<s4>6}}"];
+	Node0x3150490:s0 -> Node0x3150620;
+	Node0x3150490:s1 -> Node0x31504e0;
+	Node0x3150490:s2 -> Node0x3150530;
+	Node0x3150490:s3 -> Node0x3150580;
+	Node0x3150490:s4 -> Node0x31505d0;
+	Node0x31504e0 [shape=record,label="{%38:\l\l  %39 = load i8, i8* %1, align 1, !tbaa !9\l  %40 = sext i8 %39 to i32\l  %41 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.55, i64 0, i64 0), i32\l... %40)\l  %42 = load i8, i8* %2, align 1, !tbaa !9\l  %43 = sext i8 %42 to i32\l  %44 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.55, i64 0, i64 0), i32\l... %43)\l  br label %72\l}"];
+	Node0x31504e0 -> Node0x31506c0;
+	Node0x3150530 [shape=record,label="{%45:\l\l  %46 = bitcast i8* %1 to i64*\l  %47 = load i64, i64* %46, align 8, !tbaa !10\l  %48 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str.56, i64 0, i64 0), i64\l... %47)\l  %49 = bitcast i8* %2 to i64*\l  %50 = load i64, i64* %49, align 8, !tbaa !10\l  %51 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str.56, i64 0, i64 0), i64\l... %50)\l  br label %72\l}"];
+	Node0x3150530 -> Node0x31506c0;
+	Node0x3150580 [shape=record,label="{%52:\l\l  %53 = bitcast i8* %1 to float*\l  %54 = load float, float* %53, align 4, !tbaa !12\l  %55 = fpext float %54 to double\l  %56 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.57, i64 0, i64 0),\l... double %55)\l  %57 = bitcast i8* %2 to float*\l  %58 = load float, float* %57, align 4, !tbaa !12\l  %59 = fpext float %58 to double\l  %60 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.57, i64 0, i64 0),\l... double %59)\l  br label %72\l}"];
+	Node0x3150580 -> Node0x31506c0;
+	Node0x31505d0 [shape=record,label="{%61:\l\l  %62 = bitcast i8* %1 to double*\l  %63 = load double, double* %62, align 8, !tbaa !14\l  %64 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.58, i64 0, i64 0),\l... double %63)\l  %65 = bitcast i8* %2 to double*\l  %66 = load double, double* %65, align 8, !tbaa !14\l  %67 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.58, i64 0, i64 0),\l... double %66)\l  br label %72\l}"];
+	Node0x31505d0 -> Node0x31506c0;
+	Node0x3150620 [shape=record,label="{%68:\l\l  br i1 %12, label %69, label %75\l|{<s0>T|<s1>F}}"];
+	Node0x3150620:s0 -> Node0x3150670;
+	Node0x3150620:s1 -> Node0x3150760;
+	Node0x3150670 [shape=record,label="{%69:\l\l  %70 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.53, i64 0, i64 0), i8*\l... %1)\l  %71 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.53, i64 0, i64 0), i8*\l... %2)\l  br label %73\l}"];
+	Node0x3150670 -> Node0x3150710;
+	Node0x31506c0 [shape=record,label="{%72:\l\l  br i1 %12, label %73, label %75\l|{<s0>T|<s1>F}}"];
+	Node0x31506c0:s0 -> Node0x3150710;
+	Node0x31506c0:s1 -> Node0x3150760;
+	Node0x3150710 [shape=record,label="{%73:\l\l  %74 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.59, i64 0, i64 0), i8*\l... %3)\l  br label %79\l}"];
+	Node0x3150710 -> Node0x31507b0;
+	Node0x3150760 [shape=record,label="{%75:\l\l  %76 = bitcast i8* %3 to i32*\l  %77 = load i32, i32* %76, align 4, !tbaa !7\l  %78 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %9,\l... i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.60, i64 0, i64 0), i32\l... %77)\l  br label %79\l}"];
+	Node0x3150760 -> Node0x31507b0;
+	Node0x31507b0 [shape=record,label="{%79:\l\l  %80 = icmp eq %struct._IO_FILE* %9, null\l  br i1 %80, label %83, label %81\l|{<s0>T|<s1>F}}"];
+	Node0x31507b0:s0 -> Node0x3150850;
+	Node0x31507b0:s1 -> Node0x3150800;
+	Node0x3150800 [shape=record,label="{%81:\l\l  %82 = call i32 @fclose(%struct._IO_FILE* nonnull %9)\l  br label %83\l}"];
+	Node0x3150800 -> Node0x3150850;
+	Node0x3150850 [shape=record,label="{%83:\l\l  call void @llvm.lifetime.end(i64 1024, i8* nonnull %10) #6\l  ret void\l}"];
+}

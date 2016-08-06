@@ -1,0 +1,20 @@
+digraph "CFG for '_Z12getBitPosABR8DataType' function" {
+	label="CFG for '_Z12getBitPosABR8DataType' function";
+
+	Node0x3139460 [shape=record,label="{%1:\l  %2 = add i32 %0, -1\l  %3 = icmp ult i32 %2, 5\l  br i1 %3, label %7, label %4\l|{<s0>T|<s1>F}}"];
+	Node0x3139460:s0 -> Node0x3139500;
+	Node0x3139460:s1 -> Node0x31394b0;
+	Node0x31394b0 [shape=record,label="{%4:\l\l  %5 = icmp eq i32 %0, 6\l  %6 = select i1 %5, i32 63, i32 -1\l  br label %11\l}"];
+	Node0x31394b0 -> Node0x3139550;
+	Node0x3139500 [shape=record,label="{%7:\l\l  %8 = sext i32 %2 to i64\l  %9 = getelementptr inbounds [5 x i32], [5 x i32]* @switch.table, i64 0, i64\l... %8\l  %10 = load i32, i32* %9, align 4\l  br label %11\l}"];
+	Node0x3139500 -> Node0x3139550;
+	Node0x3139550 [shape=record,label="{%11:\l\l  %12 = phi i32 [ %6, %4 ], [ %10, %7 ]\l  %13 = load i32, i32* @bu, align 4, !tbaa !1\l  %14 = icmp sgt i32 %13, %12\l  br i1 %14, label %18, label %15\l|{<s0>T|<s1>F}}"];
+	Node0x3139550:s0 -> Node0x31395f0;
+	Node0x3139550:s1 -> Node0x31395a0;
+	Node0x31395a0 [shape=record,label="{%15:\l\l  %16 = load i32, i32* @bl, align 4, !tbaa !1\l  %17 = icmp sgt i32 %16, -1\l  br i1 %17, label %19, label %18\l|{<s0>T|<s1>F}}"];
+	Node0x31395a0:s0 -> Node0x3139640;
+	Node0x31395a0:s1 -> Node0x31395f0;
+	Node0x31395f0 [shape=record,label="{%18:\l\l  br label %19\l}"];
+	Node0x31395f0 -> Node0x3139640;
+	Node0x3139640 [shape=record,label="{%19:\l\l  %20 = phi i32 [ %12, %18 ], [ %13, %15 ]\l  %21 = phi i32 [ 0, %18 ], [ %16, %15 ]\l  %22 = tail call i32 @rand() #6\l  %23 = sub nsw i32 %20, %21\l  %24 = icmp sgt i32 %23, -1\l  %25 = sub i32 0, %23\l  %26 = select i1 %24, i32 %23, i32 %25\l  %27 = add nsw i32 %26, 1\l  %28 = srem i32 %22, %27\l  %29 = add nsw i32 %28, %21\l  ret i32 %29\l}"];
+}

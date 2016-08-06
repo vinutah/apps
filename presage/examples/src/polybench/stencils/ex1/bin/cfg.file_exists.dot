@@ -1,0 +1,5 @@
+digraph "CFG for 'file_exists' function" {
+	label="CFG for 'file_exists' function";
+
+	Node0x3165210 [shape=record,label="{%1:\l  %2 = tail call i32 @access(i8* %0, i32 0) #6\l  %3 = icmp ne i32 %2, -1\l  %4 = zext i1 %3 to i32\l  ret i32 %4\l}"];
+}

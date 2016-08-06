@@ -1,0 +1,33 @@
+digraph "CFG for '_Z11updateFSIdxv' function" {
+	label="CFG for '_Z11updateFSIdxv' function";
+
+	Node0x3158f60 [shape=record,label="{%0:\l  %1 = load i64, i64* @intvCount, align 8, !tbaa !1\l  %2 = icmp sgt i64 %1, 0\l  %3 = load i64, i64* @ef, align 8\l  %4 = icmp sgt i64 %3, 0\l  %5 = and i1 %2, %4\l  br i1 %5, label %6, label %10\l|{<s0>T|<s1>F}}"];
+	Node0x3158f60:s0 -> Node0x3158fb0;
+	Node0x3158f60:s1 -> Node0x3159000;
+	Node0x3158fb0 [shape=record,label="{%6:\l\l  %7 = mul nsw i64 %3, %1\l  %8 = tail call noalias i8* @calloc(i64 %7, i64 8) #6\l  store i8* %8, i8** bitcast (i64** @dynFSIdx to i8**), align 8, !tbaa !5\l  %9 = bitcast i8* %8 to i64*\l  br label %12\l}"];
+	Node0x3158fb0 -> Node0x314ca10;
+	Node0x3159000 [shape=record,label="{%10:\l\l  %11 = load i64*, i64** @dynFSIdx, align 8, !tbaa !5\l  br label %12\l}"];
+	Node0x3159000 -> Node0x314ca10;
+	Node0x314ca10 [shape=record,label="{%12:\l\l  %13 = phi i64* [ %11, %10 ], [ %9, %6 ]\l  %14 = icmp eq i64* %13, null\l  br i1 %14, label %18, label %15\l|{<s0>T|<s1>F}}"];
+	Node0x314ca10:s0 -> Node0x314cab0;
+	Node0x314ca10:s1 -> Node0x314ca60;
+	Node0x314ca60 [shape=record,label="{%15:\l\l  %16 = load i64, i64* @intvCount, align 8, !tbaa !1\l  %17 = icmp sgt i64 %16, 0\l  br i1 %17, label %20, label %50\l|{<s0>T|<s1>F}}"];
+	Node0x314ca60:s0 -> Node0x314cb00;
+	Node0x314ca60:s1 -> Node0x314cc90;
+	Node0x314cab0 [shape=record,label="{%18:\l\l  %19 = tail call i32 @puts(i8* getelementptr inbounds ([47 x i8], [47 x i8]*\l... @str.62, i64 0, i64 0))\l  tail call void @exit(i32 -1) #11\l  unreachable\l}"];
+	Node0x314cb00 [shape=record,label="{%20:\l\l  %21 = phi i64 [ %47, %46 ], [ 0, %15 ]\l  %22 = load i64, i64* @ef, align 8, !tbaa !1\l  %23 = icmp sgt i64 %22, 0\l  br i1 %23, label %24, label %46\l|{<s0>T|<s1>F}}"];
+	Node0x314cb00:s0 -> Node0x314cb50;
+	Node0x314cb00:s1 -> Node0x314cc40;
+	Node0x314cb50 [shape=record,label="{%24:\l\l  %25 = phi i64 [ %43, %42 ], [ 0, %20 ]\l  %26 = tail call i64 @_Z12gen64bitRandv()\l  %27 = load i64, i64* @intvsz, align 8, !tbaa !1\l  %28 = icmp sgt i64 %27, 0\l  br i1 %28, label %29, label %42\l|{<s0>T|<s1>F}}"];
+	Node0x314cb50:s0 -> Node0x314cba0;
+	Node0x314cb50:s1 -> Node0x314cbf0;
+	Node0x314cba0 [shape=record,label="{%29:\l\l  %30 = mul nsw i64 %27, %21\l  %31 = srem i64 %26, %27\l  %32 = icmp slt i64 %31, 0\l  %33 = sub nsw i64 0, %31\l  %34 = select i1 %32, i64 %33, i64 %31\l  %35 = add i64 %30, 1\l  %36 = add i64 %35, %34\l  %37 = load i64, i64* @ef, align 8, !tbaa !1\l  %38 = mul nsw i64 %37, %21\l  %39 = add nsw i64 %38, %25\l  %40 = load i64*, i64** @dynFSIdx, align 8, !tbaa !5\l  %41 = getelementptr inbounds i64, i64* %40, i64 %39\l  store i64 %36, i64* %41, align 8, !tbaa !1\l  br label %42\l}"];
+	Node0x314cba0 -> Node0x314cbf0;
+	Node0x314cbf0 [shape=record,label="{%42:\l\l  %43 = add nuw nsw i64 %25, 1\l  %44 = load i64, i64* @ef, align 8, !tbaa !1\l  %45 = icmp slt i64 %43, %44\l  br i1 %45, label %24, label %46\l|{<s0>T|<s1>F}}"];
+	Node0x314cbf0:s0 -> Node0x314cb50;
+	Node0x314cbf0:s1 -> Node0x314cc40;
+	Node0x314cc40 [shape=record,label="{%46:\l\l  %47 = add nuw nsw i64 %21, 1\l  %48 = load i64, i64* @intvCount, align 8, !tbaa !1\l  %49 = icmp slt i64 %47, %48\l  br i1 %49, label %20, label %50\l|{<s0>T|<s1>F}}"];
+	Node0x314cc40:s0 -> Node0x314cb00;
+	Node0x314cc40:s1 -> Node0x314cc90;
+	Node0x314cc90 [shape=record,label="{%50:\l\l  ret void\l}"];
+}

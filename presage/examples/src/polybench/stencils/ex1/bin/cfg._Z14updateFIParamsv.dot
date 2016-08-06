@@ -1,0 +1,47 @@
+digraph "CFG for '_Z14updateFIParamsv' function" {
+	label="CFG for '_Z14updateFIParamsv' function";
+
+	Node0x3134810 [shape=record,label="{%0:\l  %1 = alloca i8*, align 8\l  %2 = alloca i64, align 8\l  %3 = bitcast i8** %1 to i8*\l  call void @llvm.lifetime.start(i64 8, i8* %3) #6\l  store i8* null, i8** %1, align 8, !tbaa !1\l  %4 = bitcast i64* %2 to i8*\l  call void @llvm.lifetime.start(i64 8, i8* %4) #6\l  store i64 0, i64* %2, align 8, !tbaa !5\l  %5 = tail call i64 @time(i64* null) #6\l  %6 = trunc i64 %5 to i32\l  tail call void @srand(i32 %6) #6\l  tail call void @_Z15updateTimeStampv()\l  %7 = load i8*, i8** @fiParams, align 8, !tbaa !1\l  %8 = tail call %struct._IO_FILE* @fopen(i8* %7, i8* getelementptr inbounds\l... ([2 x i8], [2 x i8]* @.str.11, i64 0, i64 0))\l  %9 = icmp eq %struct._IO_FILE* %8, null\l  br i1 %9, label %13, label %10\l|{<s0>T|<s1>F}}"];
+	Node0x3134810:s0 -> Node0x3148bb0;
+	Node0x3134810:s1 -> Node0x3148b60;
+	Node0x3148b60 [shape=record,label="{%10:\l\l  %11 = call i64 @getline(i8** nonnull %1, i64* nonnull %2, %struct._IO_FILE*\l... nonnull %8)\l  %12 = icmp eq i64 %11, -1\l  br i1 %12, label %22, label %15\l|{<s0>T|<s1>F}}"];
+	Node0x3148b60:s0 -> Node0x3148c50;
+	Node0x3148b60:s1 -> Node0x3148c00;
+	Node0x3148bb0 [shape=record,label="{%13:\l\l  %14 = tail call i32 @puts(i8* getelementptr inbounds ([42 x i8], [42 x i8]*\l... @str.61, i64 0, i64 0))\l  tail call void @exit(i32 -1) #11\l  unreachable\l}"];
+	Node0x3148c00 [shape=record,label="{%15:\l\l  %16 = load i8*, i8** %1, align 8, !tbaa !1\l  %17 = call i8* @_Z18getStrFieldByIndexPcPKci(i8* %16, i8* getelementptr\l... inbounds ([3 x i8], [3 x i8]* @.str.13, i64 0, i64 0), i32 0)\l  %18 = load i8*, i8** %1, align 8, !tbaa !1\l  %19 = call i8* @_Z18getStrFieldByIndexPcPKci(i8* %18, i8* getelementptr\l... inbounds ([3 x i8], [3 x i8]* @.str.13, i64 0, i64 0), i32 1)\l  call void @_Z13processParamsPKcS0_(i8* %17, i8* %19)\l  %20 = call i64 @getline(i8** nonnull %1, i64* nonnull %2, %struct._IO_FILE*\l... nonnull %8)\l  %21 = icmp eq i64 %20, -1\l  br i1 %21, label %22, label %15\l|{<s0>T|<s1>F}}"];
+	Node0x3148c00:s0 -> Node0x3148c50;
+	Node0x3148c00:s1 -> Node0x3148c00;
+	Node0x3148c50 [shape=record,label="{%22:\l\l  %23 = load i32, i32* @pfs, align 4, !tbaa !7\l  %24 = icmp eq i32 %23, 0\l  br i1 %24, label %25, label %54\l|{<s0>T|<s1>F}}"];
+	Node0x3148c50:s0 -> Node0x3148ca0;
+	Node0x3148c50:s1 -> Node0x3148fc0;
+	Node0x3148ca0 [shape=record,label="{%25:\l\l  %26 = load i64, i64* @tf, align 8, !tbaa !9\l  %27 = icmp sgt i64 %26, 0\l  br i1 %27, label %28, label %29\l|{<s0>T|<s1>F}}"];
+	Node0x3148ca0:s0 -> Node0x3148cf0;
+	Node0x3148ca0:s1 -> Node0x3148d40;
+	Node0x3148cf0 [shape=record,label="{%28:\l\l  store i64 %26, i64* @intvsz, align 8, !tbaa !9\l  br label %29\l}"];
+	Node0x3148cf0 -> Node0x3148d40;
+	Node0x3148d40 [shape=record,label="{%29:\l\l  %30 = load i64, i64* @dynFSCount, align 8, !tbaa !9\l  %31 = icmp sgt i64 %30, 0\l  %32 = load i64, i64* @intvsz, align 8\l  %33 = icmp sgt i64 %32, 0\l  %34 = and i1 %31, %33\l  br i1 %34, label %35, label %45\l|{<s0>T|<s1>F}}"];
+	Node0x3148d40:s0 -> Node0x3148d90;
+	Node0x3148d40:s1 -> Node0x3148e80;
+	Node0x3148d90 [shape=record,label="{%35:\l\l  %36 = srem i64 %30, %32\l  %37 = icmp eq i64 %36, 0\l  %38 = sdiv i64 %30, %32\l  br i1 %37, label %39, label %40\l|{<s0>T|<s1>F}}"];
+	Node0x3148d90:s0 -> Node0x3148de0;
+	Node0x3148d90:s1 -> Node0x3148e30;
+	Node0x3148de0 [shape=record,label="{%39:\l\l  store i64 %38, i64* @intvCount, align 8, !tbaa !9\l  br label %45\l}"];
+	Node0x3148de0 -> Node0x3148e80;
+	Node0x3148e30 [shape=record,label="{%40:\l\l  %41 = sitofp i64 %38 to double\l  %42 = call double @floor(double %41) #12\l  %43 = fadd double %42, 1.000000e+00\l  %44 = fptosi double %43 to i64\l  store i64 %44, i64* @intvCount, align 8, !tbaa !9\l  br label %45\l}"];
+	Node0x3148e30 -> Node0x3148e80;
+	Node0x3148e80 [shape=record,label="{%45:\l\l  %46 = load i32, i32* @fidatardflag, align 4, !tbaa !7\l  %47 = icmp eq i32 %46, 0\l  br i1 %47, label %48, label %49\l|{<s0>T|<s1>F}}"];
+	Node0x3148e80:s0 -> Node0x3148ed0;
+	Node0x3148e80:s1 -> Node0x3148f20;
+	Node0x3148ed0 [shape=record,label="{%48:\l\l  call void @_Z11updateFSIdxv()\l  br label %49\l}"];
+	Node0x3148ed0 -> Node0x3148f20;
+	Node0x3148f20 [shape=record,label="{%49:\l\l  %50 = load i64*, i64** @dynFSIdx, align 8, !tbaa !1\l  %51 = icmp eq i64* %50, null\l  br i1 %51, label %52, label %54\l|{<s0>T|<s1>F}}"];
+	Node0x3148f20:s0 -> Node0x3148f70;
+	Node0x3148f20:s1 -> Node0x3148fc0;
+	Node0x3148f70 [shape=record,label="{%52:\l\l  %53 = call i32 @puts(i8* getelementptr inbounds ([47 x i8], [47 x i8]* @str,\l... i64 0, i64 0))\l  call void @exit(i32 -1) #11\l  unreachable\l}"];
+	Node0x3148fc0 [shape=record,label="{%54:\l\l  %55 = load i8*, i8** @fiStat, align 8, !tbaa !1\l  %56 = call i32 @_Z11file_existsPKc(i8* %55)\l  %57 = load i32, i32* @pfs, align 4\l  %58 = or i32 %57, %56\l  %59 = icmp eq i32 %58, 0\l  br i1 %59, label %60, label %61\l|{<s0>T|<s1>F}}"];
+	Node0x3148fc0:s0 -> Node0x3149010;
+	Node0x3148fc0:s1 -> Node0x3149060;
+	Node0x3149010 [shape=record,label="{%60:\l\l  call void @_Z11writeFIDataPKcPvS1_S1_8DataTypeS0_(i8* getelementptr inbounds\l... ([11 x i8], [11 x i8]* @.str.15, i64 0, i64 0), i8* getelementptr inbounds\l... ([15 x i8], [15 x i8]* @.str.16, i64 0, i64 0), i8* getelementptr inbounds\l... ([16 x i8], [16 x i8]* @.str.17, i64 0, i64 0), i8* getelementptr inbounds\l... ([13 x i8], [13 x i8]* @.str.18, i64 0, i64 0), i32 7, i8* getelementptr\l... inbounds ([2 x i8], [2 x i8]* @.str.4, i64 0, i64 0))\l  br label %61\l}"];
+	Node0x3149010 -> Node0x3149060;
+	Node0x3149060 [shape=record,label="{%61:\l\l  call void @_Z11printParamsv()\l  call void @_Z11checkParamsv()\l  store i32 1, i32* @fidatardflag, align 4, !tbaa !7\l  %62 = call i32 @fclose(%struct._IO_FILE* nonnull %8)\l  call void @llvm.lifetime.end(i64 8, i8* %4) #6\l  call void @llvm.lifetime.end(i64 8, i8* %3) #6\l  ret void\l}"];
+}

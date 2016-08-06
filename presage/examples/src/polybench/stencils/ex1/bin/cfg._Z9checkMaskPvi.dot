@@ -1,0 +1,5 @@
+digraph "CFG for '_Z9checkMaskPvi' function" {
+	label="CFG for '_Z9checkMaskPvi' function";
+
+	Node0x31445d0 [shape=record,label="{%2:\l  %3 = alloca i64, align 8\l  %4 = bitcast i64* %3 to i8*\l  call void @llvm.lifetime.start(i64 8, i8* %4) #6\l  store i64 0, i64* %3, align 8, !tbaa !1\l  %5 = sext i32 %1 to i64\l  %6 = call i32 @memcmp(i8* %0, i8* %4, i64 %5) #11\l  %7 = icmp ne i32 %6, 0\l  %8 = zext i1 %7 to i32\l  call void @llvm.lifetime.end(i64 8, i8* %4) #6\l  ret i32 %8\l}"];
+}

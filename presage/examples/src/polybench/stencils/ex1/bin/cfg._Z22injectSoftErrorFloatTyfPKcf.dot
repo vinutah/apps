@@ -1,0 +1,24 @@
+digraph "CFG for '_Z22injectSoftErrorFloatTyfPKcf' function" {
+	label="CFG for '_Z22injectSoftErrorFloatTyfPKcf' function";
+
+	Node0x316be40 [shape=record,label="{%3:\l  %4 = alloca float, align 4\l  %5 = alloca float, align 4\l  %6 = alloca float, align 4\l  %7 = alloca i32, align 4\l  store float %0, float* %4, align 4, !tbaa !1\l  store float %2, float* %5, align 4, !tbaa !1\l  %8 = load i32, i32* @fidatardflag, align 4, !tbaa !5\l  %9 = icmp eq i32 %8, 0\l  br i1 %9, label %10, label %11\l|{<s0>T|<s1>F}}"];
+	Node0x316be40:s0 -> Node0x316be90;
+	Node0x316be40:s1 -> Node0x316bee0;
+	Node0x316be90 [shape=record,label="{%10:\l\l  tail call void @_Z14updateFIParamsv()\l  br label %11\l}"];
+	Node0x316be90 -> Node0x316bee0;
+	Node0x316bee0 [shape=record,label="{%11:\l\l  %12 = bitcast float* %6 to i8*\l  call void @llvm.lifetime.start(i64 4, i8* %12) #6\l  %13 = bitcast float* %4 to i32*\l  %14 = load i32, i32* %13, align 4, !tbaa !1\l  %15 = bitcast float* %6 to i32*\l  store i32 %14, i32* %15, align 4, !tbaa !1\l  %16 = bitcast i32* %7 to i8*\l  call void @llvm.lifetime.start(i64 4, i8* %16) #6\l  store i32 -1, i32* %7, align 4, !tbaa !5\l  %17 = bitcast float* %5 to i8*\l  %18 = call i32 @_Z9checkMaskPvi(i8* %17, i32 4)\l  %19 = icmp eq i32 %18, 0\l  br i1 %19, label %36, label %20\l|{<s0>T|<s1>F}}"];
+	Node0x316bee0:s0 -> Node0x316c070;
+	Node0x316bee0:s1 -> Node0x316bf30;
+	Node0x316bf30 [shape=record,label="{%20:\l\l  %21 = load i64, i64* @fsFloatTy, align 8, !tbaa !7\l  %22 = add nsw i64 %21, 1\l  store i64 %22, i64* @fsFloatTy, align 8, !tbaa !7\l  %23 = load i32, i32* @pfs, align 4, !tbaa !5\l  %24 = icmp eq i32 %23, 1\l  br i1 %24, label %36, label %25\l|{<s0>T|<s1>F}}"];
+	Node0x316bf30:s0 -> Node0x316c070;
+	Node0x316bf30:s1 -> Node0x316bf80;
+	Node0x316bf80 [shape=record,label="{%25:\l\l  %26 = call i32 @_Z13matchDynFSIdxv()\l  %27 = icmp eq i32 %26, 0\l  br i1 %27, label %36, label %28\l|{<s0>T|<s1>F}}"];
+	Node0x316bf80:s0 -> Node0x316c070;
+	Node0x316bf80:s1 -> Node0x316bfd0;
+	Node0x316bfd0 [shape=record,label="{%28:\l\l  %29 = bitcast float* %4 to i8*\l  %30 = load i32, i32* @fialg, align 4, !tbaa !9\l  %31 = call i32 @_Z7flipBitPvj8DataType6FIAlgo(i8* %29, i32 4, i32 5, i32 %30)\l  store i32 %31, i32* %7, align 4, !tbaa !5\l  %32 = icmp sgt i32 %31, -1\l  br i1 %32, label %33, label %36\l|{<s0>T|<s1>F}}"];
+	Node0x316bfd0:s0 -> Node0x316c020;
+	Node0x316bfd0:s1 -> Node0x316c070;
+	Node0x316c020 [shape=record,label="{%33:\l\l  %34 = load i64, i64* @fiFloatTy, align 8, !tbaa !7\l  %35 = add nsw i64 %34, 1\l  store i64 %35, i64* @fiFloatTy, align 8, !tbaa !7\l  call void @_Z11writeFIDataPKcPvS1_S1_8DataTypeS0_(i8* %1, i8* %12, i8* %29,\l... i8* nonnull %16, i32 5, i8* getelementptr inbounds ([2 x i8], [2 x i8]*\l... @.str.9, i64 0, i64 0))\l  br label %36\l}"];
+	Node0x316c020 -> Node0x316c070;
+	Node0x316c070 [shape=record,label="{%36:\l\l  %37 = load float, float* %4, align 4, !tbaa !1\l  call void @llvm.lifetime.end(i64 4, i8* %16) #6\l  call void @llvm.lifetime.end(i64 4, i8* %12) #6\l  ret float %37\l}"];
+}

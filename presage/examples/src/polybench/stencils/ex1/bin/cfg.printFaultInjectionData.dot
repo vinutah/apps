@@ -1,0 +1,19 @@
+digraph "CFG for 'printFaultInjectionData' function" {
+	label="CFG for 'printFaultInjectionData' function";
+
+	Node0x3145b40 [shape=record,label="{%0:\l  %1 = load i32, i32* @pfs, align 4, !tbaa !1\l  switch i32 %1, label %2 [\l    i32 -1, label %29\l    i32 1, label %29\l  ]\l|{<s0>def|<s1>-1|<s2>1}}"];
+	Node0x3145b40:s0 -> Node0x3145b90;
+	Node0x3145b40:s1 -> Node0x3145cd0;
+	Node0x3145b40:s2 -> Node0x3145cd0;
+	Node0x3145b90 [shape=record,label="{%2:\l\l  %3 = load i64, i64* @fiIntTy1, align 8, !tbaa !5\l  %4 = load i64, i64* @fiIntTy16, align 8, !tbaa !5\l  %5 = add nsw i64 %4, %3\l  %6 = load i64, i64* @fiIntTy32, align 8, !tbaa !5\l  %7 = add nsw i64 %5, %6\l  %8 = load i64, i64* @fiIntTy64, align 8, !tbaa !5\l  %9 = add nsw i64 %7, %8\l  %10 = load i64, i64* @fiFloatTy, align 8, !tbaa !5\l  %11 = add nsw i64 %9, %10\l  %12 = load i64, i64* @fiDoubleTy, align 8, !tbaa !5\l  %13 = add nsw i64 %11, %12\l  %14 = load i8*, i8** @fiCount, align 8, !tbaa !7\l  %15 = tail call %struct._IO_FILE* @_Z5getFDPKcS0_(i8* %14, i8* getelementptr\l... inbounds ([2 x i8], [2 x i8]* @.str.4, i64 0, i64 0))\l  %16 = tail call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE*\l... %15, i8* getelementptr inbounds ([27 x i8], [27 x i8]* @.str.6, i64 0, i64\l... 0), i64 %13)\l  %17 = load i64, i64* @execKey, align 8, !tbaa !9\l  %18 = tail call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE*\l... %15, i8* getelementptr inbounds ([15 x i8], [15 x i8]* @.str.7, i64 0, i64\l... 0), i64 %17)\l  %19 = load i64, i64* @detectCounter, align 8, !tbaa !5\l  %20 = tail call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE*\l... %15, i8* getelementptr inbounds ([28 x i8], [28 x i8]* @.str.8, i64 0, i64\l... 0), i64 %19)\l  %21 = icmp eq %struct._IO_FILE* %15, null\l  br i1 %21, label %24, label %22\l|{<s0>T|<s1>F}}"];
+	Node0x3145b90:s0 -> Node0x3145c30;
+	Node0x3145b90:s1 -> Node0x3145be0;
+	Node0x3145be0 [shape=record,label="{%22:\l\l  %23 = tail call i32 @fclose(%struct._IO_FILE* nonnull %15)\l  br label %24\l}"];
+	Node0x3145be0 -> Node0x3145c30;
+	Node0x3145c30 [shape=record,label="{%24:\l\l  %25 = load i64*, i64** @dynFSIdx, align 8, !tbaa !7\l  %26 = icmp eq i64* %25, null\l  br i1 %26, label %29, label %27\l|{<s0>T|<s1>F}}"];
+	Node0x3145c30:s0 -> Node0x3145cd0;
+	Node0x3145c30:s1 -> Node0x3145c80;
+	Node0x3145c80 [shape=record,label="{%27:\l\l  %28 = bitcast i64* %25 to i8*\l  tail call void @free(i8* %28) #6\l  store i64* null, i64** @dynFSIdx, align 8, !tbaa !7\l  br label %29\l}"];
+	Node0x3145c80 -> Node0x3145cd0;
+	Node0x3145cd0 [shape=record,label="{%29:\l\l  %30 = phi i32 [ -1, %0 ], [ -1, %0 ], [ 0, %24 ], [ 0, %27 ]\l  ret i32 %30\l}"];
+}

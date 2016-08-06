@@ -1,0 +1,14 @@
+digraph "CFG for '_Z18getStrFieldByIndexPcPKci' function" {
+	label="CFG for '_Z18getStrFieldByIndexPcPKci' function";
+
+	Node0x3158290 [shape=record,label="{%3:\l  %4 = alloca [1024 x i8], align 16\l  %5 = getelementptr inbounds [1024 x i8], [1024 x i8]* %4, i64 0, i64 0\l  call void @llvm.lifetime.start(i64 1024, i8* %5) #6\l  %6 = call i8* @strcpy(i8* %5, i8* %0) #6\l  %7 = call i8* @strtok(i8* %5, i8* %1) #6\l  %8 = icmp eq i8* %7, null\l  br i1 %8, label %17, label %9\l|{<s0>T|<s1>F}}"];
+	Node0x3158290:s0 -> Node0x3158380;
+	Node0x3158290:s1 -> Node0x31582e0;
+	Node0x31582e0 [shape=record,label="{%9:\l\l  %10 = phi i32 [ %12, %14 ], [ -1, %3 ]\l  %11 = phi i8* [ %15, %14 ], [ %7, %3 ]\l  %12 = add nsw i32 %10, 1\l  %13 = icmp eq i32 %12, %2\l  br i1 %13, label %17, label %14\l|{<s0>T|<s1>F}}"];
+	Node0x31582e0:s0 -> Node0x3158380;
+	Node0x31582e0:s1 -> Node0x3158330;
+	Node0x3158330 [shape=record,label="{%14:\l\l  %15 = call i8* @strtok(i8* null, i8* %1) #6\l  %16 = icmp eq i8* %15, null\l  br i1 %16, label %17, label %9\l|{<s0>T|<s1>F}}"];
+	Node0x3158330:s0 -> Node0x3158380;
+	Node0x3158330:s1 -> Node0x31582e0;
+	Node0x3158380 [shape=record,label="{%17:\l\l  %18 = phi i8* [ null, %3 ], [ %11, %9 ], [ null, %14 ]\l  call void @llvm.lifetime.end(i64 1024, i8* %5) #6\l  ret i8* %18\l}"];
+}

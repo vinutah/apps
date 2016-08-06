@@ -1,0 +1,19 @@
+digraph "CFG for 'printFaultSitesData' function" {
+	label="CFG for 'printFaultSitesData' function";
+
+	Node0x3134620 [shape=record,label="{%0:\l  %1 = load i32, i32* @pfs, align 4, !tbaa !1\l  switch i32 %1, label %2 [\l    i32 -1, label %25\l    i32 0, label %25\l  ]\l|{<s0>def|<s1>-1|<s2>0}}"];
+	Node0x3134620:s0 -> Node0x3134670;
+	Node0x3134620:s1 -> Node0x31347b0;
+	Node0x3134620:s2 -> Node0x31347b0;
+	Node0x3134670 [shape=record,label="{%2:\l\l  %3 = load i64, i64* @fsIntTy1, align 8, !tbaa !5\l  %4 = load i64, i64* @fsIntTy16, align 8, !tbaa !5\l  %5 = add nsw i64 %4, %3\l  %6 = load i64, i64* @fsIntTy32, align 8, !tbaa !5\l  %7 = add nsw i64 %5, %6\l  %8 = load i64, i64* @fsIntTy64, align 8, !tbaa !5\l  %9 = add nsw i64 %7, %8\l  %10 = load i64, i64* @fsFloatTy, align 8, !tbaa !5\l  %11 = add nsw i64 %9, %10\l  %12 = load i64, i64* @fsDoubleTy, align 8, !tbaa !5\l  %13 = add nsw i64 %11, %12\l  %14 = load i8*, i8** @fsStat, align 8, !tbaa !7\l  %15 = tail call %struct._IO_FILE* @_Z5getFDPKcS0_(i8* %14, i8* getelementptr\l... inbounds ([2 x i8], [2 x i8]* @.str.4, i64 0, i64 0))\l  %16 = tail call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE*\l... %15, i8* getelementptr inbounds ([22 x i8], [22 x i8]* @.str.5, i64 0, i64\l... 0), i64 %13)\l  %17 = icmp eq %struct._IO_FILE* %15, null\l  br i1 %17, label %20, label %18\l|{<s0>T|<s1>F}}"];
+	Node0x3134670:s0 -> Node0x3134710;
+	Node0x3134670:s1 -> Node0x31346c0;
+	Node0x31346c0 [shape=record,label="{%18:\l\l  %19 = tail call i32 @fclose(%struct._IO_FILE* nonnull %15)\l  br label %20\l}"];
+	Node0x31346c0 -> Node0x3134710;
+	Node0x3134710 [shape=record,label="{%20:\l\l  %21 = load i64*, i64** @dynFSIdx, align 8, !tbaa !7\l  %22 = icmp eq i64* %21, null\l  br i1 %22, label %25, label %23\l|{<s0>T|<s1>F}}"];
+	Node0x3134710:s0 -> Node0x31347b0;
+	Node0x3134710:s1 -> Node0x3134760;
+	Node0x3134760 [shape=record,label="{%23:\l\l  %24 = bitcast i64* %21 to i8*\l  tail call void @free(i8* %24) #6\l  store i64* null, i64** @dynFSIdx, align 8, !tbaa !7\l  br label %25\l}"];
+	Node0x3134760 -> Node0x31347b0;
+	Node0x31347b0 [shape=record,label="{%25:\l\l  %26 = phi i32 [ -1, %0 ], [ -1, %0 ], [ 0, %20 ], [ 0, %23 ]\l  ret i32 %26\l}"];
+}

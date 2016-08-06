@@ -1,0 +1,15 @@
+digraph "CFG for '_Z11initPrfDatav' function" {
+	label="CFG for '_Z11initPrfDatav' function";
+
+	Node0x3178370 [shape=record,label="{%0:\l  br label %1\l}"];
+	Node0x3178370 -> Node0x31783c0;
+	Node0x31783c0 [shape=record,label="{%1:\l\l  %2 = phi i64 [ 0, %0 ], [ %9, %8 ]\l  br label %3\l}"];
+	Node0x31783c0 -> Node0x3178410;
+	Node0x3178410 [shape=record,label="{%3:\l\l  %4 = phi i64 [ 0, %1 ], [ %6, %3 ]\l  %5 = getelementptr inbounds [512 x [20 x i64]], [512 x [20 x i64]]*\l... @prf_data, i64 0, i64 %2, i64 %4\l  store i64 9223372036854775807, i64* %5, align 8, !tbaa !1\l  %6 = add nuw nsw i64 %4, 1\l  %7 = icmp eq i64 %6, 20\l  br i1 %7, label %8, label %3\l|{<s0>T|<s1>F}}"];
+	Node0x3178410:s0 -> Node0x3178460;
+	Node0x3178410:s1 -> Node0x3178410;
+	Node0x3178460 [shape=record,label="{%8:\l\l  %9 = add nuw nsw i64 %2, 1\l  %10 = icmp eq i64 %9, 512\l  br i1 %10, label %11, label %1\l|{<s0>T|<s1>F}}"];
+	Node0x3178460:s0 -> Node0x31784b0;
+	Node0x3178460:s1 -> Node0x31783c0;
+	Node0x31784b0 [shape=record,label="{%11:\l\l  ret void\l}"];
+}

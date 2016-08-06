@@ -1,0 +1,11 @@
+digraph "CFG for 'printarray' function" {
+	label="CFG for 'printarray' function";
+
+	Node0x3179210 [shape=record,label="{%2:\l  %3 = tail call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8],\l... [4 x i8]* @.str.61, i64 0, i64 0))\l  %4 = icmp sgt i32 %1, 0\l  br i1 %4, label %7, label %5\l|{<s0>T|<s1>F}}"];
+	Node0x3179210:s0 -> Node0x3167f70;
+	Node0x3179210:s1 -> Node0x3179260;
+	Node0x3179260 [shape=record,label="{%5:\l\l  %6 = tail call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8],\l... [4 x i8]* @.str.2.62, i64 0, i64 0))\l  ret void\l}"];
+	Node0x3167f70 [shape=record,label="{%7:\l\l  %8 = phi i64 [ %12, %7 ], [ 0, %2 ]\l  %9 = getelementptr inbounds double, double* %0, i64 %8\l  %10 = load double, double* %9, align 8, !tbaa !1\l  %11 = tail call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8],\l... [6 x i8]* @.str.1.63, i64 0, i64 0), double %10)\l  %12 = add nuw nsw i64 %8, 1\l  %13 = trunc i64 %12 to i32\l  %14 = icmp eq i32 %13, %1\l  br i1 %14, label %5, label %7\l|{<s0>T|<s1>F}}"];
+	Node0x3167f70:s0 -> Node0x3179260;
+	Node0x3167f70:s1 -> Node0x3167f70;
+}

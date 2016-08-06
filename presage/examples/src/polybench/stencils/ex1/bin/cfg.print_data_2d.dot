@@ -1,0 +1,28 @@
+digraph "CFG for 'print_data_2d' function" {
+	label="CFG for 'print_data_2d' function";
+
+	Node0x31762a0 [shape=record,label="{%5:\l  %6 = icmp eq i32 %4, 0\l  br i1 %6, label %9, label %7\l|{<s0>T|<s1>F}}"];
+	Node0x31762a0:s0 -> Node0x3176340;
+	Node0x31762a0:s1 -> Node0x31762f0;
+	Node0x31762f0 [shape=record,label="{%7:\l\l  %8 = tail call %struct._IO_FILE* @fopen(i8* %3, i8* getelementptr inbounds\l... ([2 x i8], [2 x i8]* @.str.12, i64 0, i64 0))\l  br label %11\l}"];
+	Node0x31762f0 -> Node0x3176390;
+	Node0x3176340 [shape=record,label="{%9:\l\l  %10 = tail call %struct._IO_FILE* @fopen(i8* %3, i8* getelementptr inbounds\l... ([2 x i8], [2 x i8]* @.str.1.13, i64 0, i64 0))\l  br label %11\l}"];
+	Node0x3176340 -> Node0x3176390;
+	Node0x3176390 [shape=record,label="{%11:\l\l  %12 = phi %struct._IO_FILE* [ %8, %7 ], [ %10, %9 ]\l  %13 = icmp sgt i32 %0, 0\l  br i1 %13, label %14, label %34\l|{<s0>T|<s1>F}}"];
+	Node0x3176390:s0 -> Node0x31763e0;
+	Node0x3176390:s1 -> Node0x3176570;
+	Node0x31763e0 [shape=record,label="{%14:\l\l  %15 = icmp sgt i32 %1, 0\l  %16 = sext i32 %1 to i64\l  br label %17\l}"];
+	Node0x31763e0 -> Node0x3176430;
+	Node0x3176430 [shape=record,label="{%17:\l\l  %18 = phi i64 [ 0, %14 ], [ %31, %30 ]\l  br i1 %15, label %19, label %30\l|{<s0>T|<s1>F}}"];
+	Node0x3176430:s0 -> Node0x3176480;
+	Node0x3176430:s1 -> Node0x3176520;
+	Node0x3176480 [shape=record,label="{%19:\l\l  %20 = mul nsw i64 %18, %16\l  br label %21\l}"];
+	Node0x3176480 -> Node0x31764d0;
+	Node0x31764d0 [shape=record,label="{%21:\l\l  %22 = phi i64 [ 0, %19 ], [ %27, %21 ]\l  %23 = add nsw i64 %22, %20\l  %24 = getelementptr inbounds double, double* %2, i64 %23\l  %25 = load double, double* %24, align 8, !tbaa !1\l  %26 = tail call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE*\l... %12, i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.4.16, i64 0, i64\l... 0), double %25)\l  %27 = add nuw nsw i64 %22, 1\l  %28 = trunc i64 %27 to i32\l  %29 = icmp eq i32 %28, %1\l  br i1 %29, label %30, label %21\l|{<s0>T|<s1>F}}"];
+	Node0x31764d0:s0 -> Node0x3176520;
+	Node0x31764d0:s1 -> Node0x31764d0;
+	Node0x3176520 [shape=record,label="{%30:\l\l  %31 = add nuw nsw i64 %18, 1\l  %32 = trunc i64 %31 to i32\l  %33 = icmp eq i32 %32, %0\l  br i1 %33, label %34, label %17\l|{<s0>T|<s1>F}}"];
+	Node0x3176520:s0 -> Node0x3176570;
+	Node0x3176520:s1 -> Node0x3176430;
+	Node0x3176570 [shape=record,label="{%34:\l\l  %35 = tail call i32 @fclose(%struct._IO_FILE* %12)\l  ret void\l}"];
+}
