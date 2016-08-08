@@ -1,0 +1,74 @@
+#!/usr/bin/tclsh
+
+
+proc GenerateSH { fileName } {
+  set currDir [pwd]
+  set plotFiles [glob *_simData_q.dat]
+  puts $plotFiles
+  set ListPlot ""
+  foreach i $plotFiles {
+      lappend ListPlot [lindex [split $i "_"] 0]
+  }
+  set ListPlot1 $ListPlot
+  set ListPlot [lsort -integer $ListPlot1]
+  puts $ListPlot
+  set MaxIter [lindex $ListPlot [expr [llength $ListPlot] - 1]]
+  set SecMaxIter [lindex $ListPlot [expr [llength $ListPlot] - 2]] 
+  set timeInt [expr $MaxIter - $SecMaxIter]
+  puts $timeInt
+  puts $MaxIter
+  puts $SecMaxIter
+  puts $timeInt
+ # puts $plotFiles
+ ##---- For the bash dump --------
+ ## if {[file exists "plot.sh"]} {
+ ##    exec /bin/rm plot.sh
+ ## }
+ ## set fopen [open "plot.sh" {RDWR CREAT APPEND}]
+ ## puts $fopen "\#\!\/bin\/bash"
+ ## puts $fopen "for((i=0;i<=$MaxIter; i+=$timeInt))\; do foo=\"_simData.dat\"\; echo -e \"splot \'\$i\$foo\' using 1:2:3 with lines \\n\"\; done | gnuplot -persists"
+ ## close $fopen
+ ##---- End bash dump ------------
+
+ ##---- Dump gif loader -----
+ if {[file exists "luleshViz.plot"]} {
+     exec /bin/rm luleshViz.plot
+ }
+ set fopen [open "luleshViz.plot" {RDWR CREAT APPEND}]
+ puts $fopen "reset"
+ puts $fopen "set term gif animate delay 5"
+ puts $fopen "set output \'lulesh.gif\'"
+ #puts $fopen "set xrange \[0:2\]"
+ #puts $fopen "set yrange \[0:2\]"
+ #puts $fopen "set zrange \[0:2\]"
+ puts $fopen "set xlabel \'X-axis\'"
+ puts $fopen "set ylabel \'Y-axis\'"
+ puts $fopen "set zlabel \'Z-axis\'"
+ for {set i 0} { $i <= $MaxIter } {incr i $timeInt} {
+     puts $fopen "splot \'$i\_simData_q.dat\' using 1:2:3 ps 2 pt 3"
+ }
+# puts $fopen "splot \'noerror.txt\' using 1:2:3 "
+# puts $fopen "splot \'$fileName\' using 1:2:3 "
+ puts $fopen "set output"
+ close $fopen
+ ##--------------------------
+}
+
+
+proc main { } {
+  if {$::argc != 1} {
+      puts "Incorrect or missing argument : Enter the time series interval"
+	  exit
+  } else {
+      set fileName [lindex $::argv 0]
+	  GenerateSH $fileName
+	  catch { exec gnuplot luleshViz.plot } msg
+          puts $msg
+	  puts "Generated lulesh.gif !! Have fun :)"
+	##  exec chmod +x plot.sh
+	##  exec ./plot.sh
+      
+  }
+}
+main
+#exec ./plot.sh
