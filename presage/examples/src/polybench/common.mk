@@ -3,10 +3,10 @@ CC=clang
 CXX_FLAGS=-O1 -fno-inline
 
 BUILD_DIR=./bin
-VULFI_LIB_DIR=/usr/local/lib
-PSG_SRC_DIR=$(HOME)/apps/presage
+#VULFI_LIB_DIR=/usr/local/lib
+#PSG_SRC_DIR=$(HOME)/apps/presage
 EX_SRC=$(PSG_SRC_DIR)/examples/src
-VULFI_SRC_DIR=$(HOME)/apps/tools/vulfi/master
+#VULFI_SRC_DIR=$(HOME)/apps/tools/vulfi/master
 INCLUDE_DIRS=-I$(VULFI_SRC_DIR)/runtime/ -I$(EX_SRC)/polybench/utilities \
 -I$(HOME)/apps/presage/include
 
@@ -66,26 +66,26 @@ bc_exi: bc_utl bc_crp bc_prt bc_et2
 
 # final bitcode w/ PRESAGE profilers inserted 
 bc_prf: bc_exp
-	opt -load /usr/local/lib/LLVMPresage.so -presage -fn $(FN_LIST) \
+	opt -load $(PSG_LIB_DIR)/LLVMPresage.so -presage -fn $(FN_LIST) \
 	-fl "noerror" -mode "profile" -bcn $(BCNAME) \
 	< $(BUILD_DIR)/$(EX_NAME).bc > \
 	$(BUILD_DIR)/$(EX_NAME)_prf.bc	
 
 # final bitcode w/ PRESAGE detectors inserted
 bc_dtr: bc_exp
-	opt -load /usr/local/lib/LLVMPresage.so -presage -fn $(FN_LIST) \
+	opt -load $(PSG_LIB_DIR)/LLVMPresage.so -presage -fn $(FN_LIST) \
 	-fl $(PRF_FL) -mode "detect" -bcn $(BCNAME) \
 	< $(BUILD_DIR)/$(EX_NAME).bc > \
 	$(BUILD_DIR)/$(EX_NAME)_dtr.bc	
 	
 bc_dtr_ty1: bc_exp
-	opt -load /usr/local/lib/LLVMPresage.so -presage -fn $(FN_LIST) \
+	opt -load $(PSG_LIB_DIR)/LLVMPresage.so -presage -fn $(FN_LIST) \
 	-fl $(PRF_FL) -mode "detty1" -bcn $(BCNAME) \
 	< $(BUILD_DIR)/$(EX_NAME).bc > \
 	$(BUILD_DIR)/$(EX_NAME)_dtr_ty1.bc	
 	
 bc_dtr_ty2: bc_exp
-	opt -load /usr/local/lib/LLVMPresage.so -presage -fn $(FN_LIST) \
+	opt -load $(PSG_LIB_DIR)/LLVMPresage.so -presage -fn $(FN_LIST) \
 	-fl $(PRF_FL) -mode "detty2" -bcn $(BCNAME) \
 	< $(BUILD_DIR)/$(EX_NAME).bc > \
 	$(BUILD_DIR)/$(EX_NAME)_dtr_ty2.bc	
@@ -93,14 +93,14 @@ bc_dtr_ty2: bc_exp
 
 # PRESAGE profilers inserted in example bitcode w/ INST Flag
 bc_prc: bc_exi
-	opt -load /usr/local/lib/LLVMPresage.so -presage -fn $(FN_LIST) \
+	opt -load $(PSG_LIB_DIR)/LLVMPresage.so -presage -fn $(FN_LIST) \
 	-bbn $(BB_LIST) -fl "error"  -mode "profile" -bcn $(BCNAME) \
 	< $(BUILD_DIR)/$(EX_NAME)_inst.bc > \
 	$(BUILD_DIR)/$(EX_NAME)_psc.bc
 
 # PRESAGE detectors inserted in example bitcode w/ INST Flag
 bc_dtc: bc_exi
-	opt -load /usr/local/lib/LLVMPresage.so -presage -fn $(FN_LIST) \
+	opt -load $(PSG_LIB_DIR)/LLVMPresage.so -presage -fn $(FN_LIST) \
 	-bbn $(BB_LIST) -fl $(PRF_FL) -mode "detect" -bcn $(BCNAME) \
 	< $(BUILD_DIR)/$(EX_NAME)_inst.bc > \
 	$(BUILD_DIR)/$(EX_NAME)_dtc.bc
