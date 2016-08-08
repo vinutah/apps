@@ -4,8 +4,8 @@
 for i in $(eval echo {1..$1})
 do
   echo "Running iteration # "$i" .."
-  alen=$(shuf -i 32-64 -n 1)
-  tstep=$(shuf -i 500-700 -n 1)
+  alen=$(gshuf -i 32-64 -n 1)
+  tstep=$(gshuf -i 500-700 -n 1)
   c1=$alen" "$tstep" noerror.txt"
   o1="noerror.txt" 
   c2=$alen" "$tstep" error.txt"
