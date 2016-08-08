@@ -1,2 +1,0 @@
-Time;"Instr_Nam";Original_Value;Corrupted_Value;Bit_Position
-1461741015358781;"  %newgep_2 = getelementptr i32, i32* %ld_lub_ptr_2, i64 %reli_";30487420;30421884;16
