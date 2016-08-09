@@ -32,6 +32,21 @@ extern long long detectCounter;
 #ifdef INST
 extern int printFaultSitesData(void);
 extern int printFaultInjectionData(void);
+
+void flipBit(void* data,unsigned bytesz,int bitPos){
+	long long dest = 0;
+	// Copy source data to a 64-bit integer
+	memcpy((void*)&dest,data,bytesz);
+    if ((dest>>bitPos)&0x1){
+	   dest = dest & (~((long long)0x1 << (bitPos)));
+    } else{
+	   dest = dest |  ((long long) 0x1 << (bitPos));
+    }
+   // Copy back the data with a random bit flipped into the source
+   memcpy(data,(void*)&dest,bytesz);
+   return ; // A single-bit error successfully injected!!
+}
+
 #endif
 
 
@@ -58,6 +73,10 @@ void init_array (int n,double *u)
 static
 void kernel_adi(int tsteps, int n,double *u,double *v,double *p,double *q)
 {
+FILE *fp_u;  
+FILE *fp_v;
+FILE *fp_p;
+FILE *fp_q;
   int t, i, j;
   double DX, DY, DT;
   double B1, B2;
@@ -111,6 +130,44 @@ void kernel_adi(int tsteps, int n,double *u,double *v,double *p,double *q)
         u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
       }
     }
+
+    char buffer_u[40] ;
+    char buffer_v[40] ;
+    char buffer_p[40] ;
+    char buffer_q[40] ;
+    sprintf(buffer_u, "%d", t);
+    sprintf(buffer_v, "%d", t);
+    sprintf(buffer_p, "%d", t);
+    sprintf(buffer_q, "%d", t);
+#ifdef FAULTY
+    strcat(buffer_u, "_simData_faulty_u.dat");
+    strcat(buffer_v, "_simData_faulty_v.dat");
+    strcat(buffer_p, "_simData_faulty_p.dat");
+    strcat(buffer_q, "_simData_faulty_q.dat");
+#else
+    strcat(buffer_u, "_simData_u.dat");
+    strcat(buffer_v, "_simData_v.dat");
+    strcat(buffer_p, "_simData_p.dat");
+    strcat(buffer_q, "_simData_q.dat");
+#endif
+    fp_u = fopen(buffer_u, "wb");
+    fp_v = fopen(buffer_v, "wb");
+    fp_p = fopen(buffer_p, "wb");
+    fp_q = fopen(buffer_q, "wb");
+    for(int i=0; i<n; i++) {
+      for(int j=0; j<n; j++) {
+          fprintf(fp_q, "%d %d %lf\n", i, j, q[i*n + j]) ;
+      }
+    }
+
+    
+//fprintf(fp_p, "%d %d %lf\n", i, j, p[i*n + j]) ;
+    
+  fclose(fp_u);
+  fclose(fp_v);
+  fclose(fp_p);
+  fclose(fp_q);
+
   }
 #pragma endscop
 }

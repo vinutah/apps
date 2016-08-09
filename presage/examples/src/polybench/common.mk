@@ -214,5 +214,6 @@ exe_dti_idx: bc_dti_idx
 	
 clean:
 	rm -rf $(BUILD_DIR)
+	rm -rf *.dat
 	rm -f *~ *.cloog *.txt *.csv *.db
 	
