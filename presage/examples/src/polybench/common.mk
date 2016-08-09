@@ -15,7 +15,7 @@ LIBS = -lm
 
 all: mkd exe
 
-exe: exe_org 
+exe: exe_org exe_dti_gep 
 #exe_ori_gep exe_ori_idx exe_prf exe_pri_gep exe_pri_idx \
 #exe_dtr exe_dtr_ty1 exe_dtr_ty2 exe_dti_gep exe_dti_idx
 
@@ -134,15 +134,17 @@ bc_pri_idx: bc_prc
 	< $(BUILD_DIR)/$(EX_NAME)_psc.bc > \
 	$(BUILD_DIR)/$(EX_NAME)_pri_idx.bc
 
+	#opt -load $(VULFI_LIB_DIR)/LLVMVulfi.so -vulfi -fn $(FN_LIST) \
+	#-fsa "addg" -lang "C" -dbgf "dbgData_"$(EX_NAME)"_dtr_gep.csv" \
+	# < $(BUILD_DIR)/$(EX_NAME)_dtc.bc > \
+	#$(BUILD_DIR)/$(EX_NAME)_dti_gep.bc
 # final example bitcode w/ PRESAGE detectors & VULFI w/ GEP fault sites
 bc_dti_gep: bc_dtc
-	opt -load $(VULFI_LIB_DIR)/LLVMVulfi.so -vulfi -fn $(FN_LIST) \
-	-fsa "addg" -lang "C" -dbgf "dbgData_"$(EX_NAME)"_dtr_gep.csv" \
-	 < $(BUILD_DIR)/$(EX_NAME)_dtc.bc > \
-	$(BUILD_DIR)/$(EX_NAME)_dti_gep.bc
+	mv $(BUILD_DIR)/$(EX_NAME)_dtc.bc $(BUILD_DIR)/$(EX_NAME)_dti_gep.bc
 	
 # final example bitcode w/ PRESAGE detectors & VULFI w/ IDX fault sites
 bc_dti_idx: bc_dtc
+	mv $(BUILD_DIR)/$(EX_NAME)_dtc.bc $(BUILD_DIR)/$(EX_NAME)_dti_idx.bc
 	opt -load $(VULFI_LIB_DIR)/LLVMVulfi.so -vulfi -fn $(FN_LIST) \
 	-fsa "addi" -lang "C" -dbgf "dbgData_"$(EX_NAME)"_dtr_idx.csv" \
 	 < $(BUILD_DIR)/$(EX_NAME)_dtc.bc > \

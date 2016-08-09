@@ -35,13 +35,20 @@ proc GenerateSH { fileName } {
  if {[file exists "luleshViz.plot"]} {
      exec /bin/rm luleshViz.plot
  }
- set fopen [open "luleshViz.plot" {RDWR CREAT APPEND}]
+ set fopen [open "$fileName\.plot" {RDWR CREAT APPEND}]
  puts $fopen "reset"
  puts $fopen "set term gif animate delay 40"
- puts $fopen "set output \'lulesh.gif\'"
+ puts $fopen "set output \'$fileName\.gif\'"
  #puts $fopen "set xrange \[0:2\]"
  #puts $fopen "set yrange \[0:2\]"
  #puts $fopen "set zrange \[0:2\]"
+ puts $fopen "set grid"
+# puts $fopen "set xtics axis" 
+# puts $fopen "set ytics axis"
+# puts $fopen "set ztics axis"
+ puts $fopen "set tics axis"
+ puts $fopen "set zeroaxis lt 1 lw 2 lc rgb \"black\""
+ puts $fopen "set title \"$fileName\""
  puts $fopen "set xlabel \'X-axis\'"
  puts $fopen "set ylabel \'Y-axis\'"
  puts $fopen "set zlabel \'Z-axis\'"
@@ -64,9 +71,9 @@ proc main { } {
   } else {
       set fileName [lindex $::argv 0]
 	  GenerateSH $fileName
-	  catch { exec gnuplot luleshViz.plot } msg
+	  catch { exec gnuplot $fileName\.plot } msg
           puts $msg
-	  puts "Generated lulesh.gif !! Have fun :)"
+	  puts "Generated $fileName\.gif !! Have fun :)"
 	##  exec chmod +x plot.sh
 	##  exec ./plot.sh
       

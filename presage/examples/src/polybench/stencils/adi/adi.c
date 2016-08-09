@@ -30,8 +30,8 @@ extern int dimcount;
 extern int psgdim[];
 extern long long detectCounter;
 #ifdef INST
-extern int printFaultSitesData(void);
-extern int printFaultInjectionData(void);
+//extern int printFaultSitesData(void);
+//extern int printFaultInjectionData(void);
 
 void flipBit(void* data,unsigned bytesz,int bitPos){
 	long long dest = 0;
@@ -50,6 +50,8 @@ void flipBit(void* data,unsigned bytesz,int bitPos){
 #endif
 
 
+#define BITFLIP 16
+
 /* Array initialization. */
 static
 void init_array (int n,double *u)
@@ -62,6 +64,7 @@ void init_array (int n,double *u)
     for (j = 0; j < n; j++)
       {
     	u[i*n+j] =  (double) rand(); //(i + n-j) / n;
+    	//u[i*n+j] =  150 * (i + n-j) / n;
       }
 }
 
@@ -127,7 +130,7 @@ FILE *fp_q;
     if(t==tsteps/2) {
         long long adr =(long long) &q[0] ;
   	  for (j=n-2; j>=1;j--) {
-  	     if( i==n/2 && j==n/2 ) q = q+1 ;
+  	     if( i==n/2 && j==n/2 ) q = q+ BITFLIP ;
   	 u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
   	  }
   	  q = (double *)adr ;
@@ -224,7 +227,7 @@ FILE *fp_q;
       for (j=n-2; j>=1; j--) {
 	    if(t==tsteps/2 && i==n/2 && j==n/2) {
 		   long long adr = (long long)&q[i*n + j] ;
-		   adr = adr+1 ;
+		   adr = adr+BITFLIP ;
 		   q[i*n + j] = *(double *)adr ;
 		}
         u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
@@ -320,8 +323,8 @@ free(p);
 free(q);
 
 #ifdef INST
-  printFaultSitesData();
-  printFaultInjectionData();
+  //printFaultSitesData();
+  //printFaultInjectionData();
 #endif
 
   return 0;

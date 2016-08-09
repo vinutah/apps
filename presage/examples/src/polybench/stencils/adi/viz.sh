@@ -7,19 +7,19 @@ if [[ "$3" == -f ]] ; then
     $WD/adi/bin/adi $1 $2 0
     mv $WD/adi/*.dat $WD/adi/fault/
     cd ./fault/
-    $WD/plot t
+    $WD/plot fault
 elif [[ "$3" == -p ]] ; then
     echo ----- PRESAGING FAULT -----
     mkdir -p ./psg
     rm -rf ./psg/*
-    $WD/adi/bin/adi $1 $2 1
+    $WD/adi/bin/adi_dti_gep $1 $2 1
     mv $WD/adi/*.dat $WD/adi/psg/
     cd ./psg/
-    $WD/plot t
+    $WD/plot psg
 elif [[ "$3" == -d ]] ; then
     $WD/adi/diff.tcl $WD/adi/fault $WD/adi/psg
     cd ./diffDir 
-    $WD/plot t
+    $WD/plot diff
 fi
 
 
