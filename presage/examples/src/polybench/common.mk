@@ -15,8 +15,9 @@ LIBS = -lm
 
 all: mkd exe
 
-exe: exe_org exe_ori_gep exe_ori_idx exe_prf exe_pri_gep exe_pri_idx \
-exe_dtr exe_dtr_ty1 exe_dtr_ty2 exe_dti_gep exe_dti_idx
+exe: exe_org 
+#exe_ori_gep exe_ori_idx exe_prf exe_pri_gep exe_pri_idx \
+#exe_dtr exe_dtr_ty1 exe_dtr_ty2 exe_dti_gep exe_dti_idx
 
 mkd: 
 	mkdir -p $(BUILD_DIR)
