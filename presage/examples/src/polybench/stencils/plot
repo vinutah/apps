@@ -37,7 +37,7 @@ proc GenerateSH { fileName } {
  }
  set fopen [open "luleshViz.plot" {RDWR CREAT APPEND}]
  puts $fopen "reset"
- puts $fopen "set term gif animate delay 5"
+ puts $fopen "set term gif animate delay 40"
  puts $fopen "set output \'lulesh.gif\'"
  #puts $fopen "set xrange \[0:2\]"
  #puts $fopen "set yrange \[0:2\]"
@@ -46,7 +46,8 @@ proc GenerateSH { fileName } {
  puts $fopen "set ylabel \'Y-axis\'"
  puts $fopen "set zlabel \'Z-axis\'"
  for {set i $MinIter} { $i <= $MaxIter } {incr i $timeInt} {
-     puts $fopen "splot \'$i\_simData_q.dat\' using 1:2:3 ps 2 pt 3"
+    puts $fopen "splot \'$i\_simData_q.dat\' using 1:2:3 ps 2 pt 3"
+    # puts $fopen "splot \'$i\_simData_q.dat\' using 1:2:3 with lines"
  }
 # puts $fopen "splot \'noerror.txt\' using 1:2:3 "
 # puts $fopen "splot \'$fileName\' using 1:2:3 "
