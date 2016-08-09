@@ -56,6 +56,8 @@ void init_array (int n,double *u)
 {
   int i, j;
   srand(0);
+        //int seed = time(NULL);
+        //srand(seed);
   for (i = 0; i < n; i++)
     for (j = 0; j < n; j++)
       {
@@ -64,12 +66,104 @@ void init_array (int n,double *u)
 }
 
 
+static
+void psg_kernel_adi(int tsteps, int n,double *u,double *v,double *p,double *q)
+{
+FILE *fp_u;  
+FILE *fp_v;
+FILE *fp_p;
+FILE *fp_q;
+  int t, i, j;
+  double DX, DY, DT;
+  double B1, B2;
+  double mul1, mul2;
+  double a, b, c, d, e, f;
+
+#pragma scop
+
+  DX = 1.0/(double)n;
+  DY = 1.0/(double)n;
+  DT = 1.0/(double)tsteps;
+  B1 = 2.0;
+  B2 = 1.0;
+  mul1 = B1 * DT / (DX * DX);
+  mul2 = B2 * DT / (DY * DY);
+
+  a = -mul1 /  2.0;
+  b = 1.0+mul1;
+  c = a;
+  d = -mul2 / 2.0;
+  e = 1.0+mul2;
+  f = d;
+
+ for (t=1; t<=tsteps; t++) {
+    //Column Sweep
+    for (i=1; i<n-1; i++) {
+      v[i] = 1.0;
+      p[i*n] = 0.0;
+      q[i*n] = v[i];
+      for (j=1; j<n-1; j++) {
+        p[i*n+j] = -c / (a*p[i*n+(j-1)]+b);
+        q[i*n+j] = (-d*u[j*n+(i-1)]+(1.0+2.0*d)*u[j*n+i] - f*u[j*n+(i+1)]-a*q[i*n+(j-1)])/(a*p[i*n+(j-1)]+b);
+      }
+      
+      v[n*(n-1)+i] = 1.0;
+      for (j=n-2; j>=1; j--) {
+        v[j*n+i] = p[i*n+j] * v[(j+1)*n+i] + q[i*n+j];
+      }
+    }
+    //Row Sweep
+    for (i=1; i<n-1; i++) {
+      u[i*n] = 1.0;
+      p[i*n] = 0.0;
+      q[i*n] = u[i*n];
+      for (j=1; j<n-1; j++) {
+        p[i*n+j] = -f / (d*p[i*n+(j-1)]+e);
+        q[i*n+j] = (-a*v[(i-1)*n+j]+(1.0+2.0*a)*v[i*n+j] - c*v[(i+1)*n+j]-d*q[i*n+(j-1)])/(d*p[i*n+(j-1)]+e);
+      }
+      u[i*n+(n-1)] = 1.0;
+
+
+    if(t==tsteps/2) {
+        long long adr =(long long) &q[0] ;
+  	  for (j=n-2; j>=1;j--) {
+  	     if( i==n/2 && j==n/2 ) q = q+1 ;
+  	 u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
+  	  }
+  	  q = (double *)adr ;
+      } else {
+          for (j=n-2; j>=1; j--) {
+            u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
+          }
+      }
+
+    //for (j=n-2; j>=1; j--) {
+    //  u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
+    //}
+    }
+
+    char buffer_q[40] ;
+    sprintf(buffer_q, "%d", t);
+    strcat(buffer_q, "_simData_q.dat");
+    fp_q = fopen(buffer_q, "wb");
+    for(int i=0; i<n; i++) {
+      for(int j=0; j<n; j++) {
+          fprintf(fp_q, "%d %d %lf\n", i, j, q[i*n + j]) ;
+      }
+    }
+    fclose(fp_q);
+
+  }
+#pragma endscop
+}
+
 /* Main computational kernel. The whole function will be timed,
    including the call and return. */
 /* Based on a Fortran code fragment from Figure 5 of
  * "Automatic Data and Computation Decomposition on Distributed Memory Parallel Computers"
  * by Peizong Lee and Zvi Meir Kedem, TOPLAS, 2002
  */
+
 static
 void kernel_adi(int tsteps, int n,double *u,double *v,double *p,double *q)
 {
@@ -126,47 +220,34 @@ FILE *fp_q;
         q[i*n+j] = (-a*v[(i-1)*n+j]+(1.0+2.0*a)*v[i*n+j] - c*v[(i+1)*n+j]-d*q[i*n+(j-1)])/(d*p[i*n+(j-1)]+e);
       }
       u[i*n+(n-1)] = 1.0;
+
       for (j=n-2; j>=1; j--) {
+	    if(t==tsteps/2 && i==n/2 && j==n/2) {
+		   long long adr = (long long)&q[i*n + j] ;
+		   adr = adr+1 ;
+		   q[i*n + j] = *(double *)adr ;
+		}
         u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
       }
+
+      //for (j=n-2; j>=1; j--) {
+      //  u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
+      //}
+    
     }
 
-    char buffer_u[40] ;
-    char buffer_v[40] ;
-    char buffer_p[40] ;
     char buffer_q[40] ;
-    sprintf(buffer_u, "%d", t);
-    sprintf(buffer_v, "%d", t);
-    sprintf(buffer_p, "%d", t);
     sprintf(buffer_q, "%d", t);
-#ifdef FAULTY
-    strcat(buffer_u, "_simData_faulty_u.dat");
-    strcat(buffer_v, "_simData_faulty_v.dat");
-    strcat(buffer_p, "_simData_faulty_p.dat");
-    strcat(buffer_q, "_simData_faulty_q.dat");
-#else
-    strcat(buffer_u, "_simData_u.dat");
-    strcat(buffer_v, "_simData_v.dat");
-    strcat(buffer_p, "_simData_p.dat");
     strcat(buffer_q, "_simData_q.dat");
-#endif
-    fp_u = fopen(buffer_u, "wb");
-    fp_v = fopen(buffer_v, "wb");
-    fp_p = fopen(buffer_p, "wb");
     fp_q = fopen(buffer_q, "wb");
+    
     for(int i=0; i<n; i++) {
       for(int j=0; j<n; j++) {
           fprintf(fp_q, "%d %d %lf\n", i, j, q[i*n + j]) ;
       }
     }
 
-    
-//fprintf(fp_p, "%d %d %lf\n", i, j, p[i*n + j]) ;
-    
-  fclose(fp_u);
-  fclose(fp_v);
-  fclose(fp_p);
-  fclose(fp_q);
+    fclose(fp_q);
 
   }
 #pragma endscop
@@ -206,25 +287,32 @@ int main(int argc, char** argv)
   init_array (n,q);
 
   gettimeofday(&start, NULL);
-  kernel_adi (tsteps,n,u,v,p,q);
+
+  if (atoi(argv[3]) == 0){
+    kernel_adi (tsteps,n,u,v,p,q);
+  } else {
+    if (atoi(argv[3]) == 1)
+  psg_kernel_adi (tsteps,n,u,v,p,q);
+  }
+
   gettimeofday(&end, NULL);
   printf("Total time taken to execute the kernel: %lf seconds\n", (double) ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec))/(double)1000000);
   runtime=(double) ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec))/(double)1000000;
 
-  if(argc==4){
-    print_data_2d(n,n,u,argv[3],1);
-    print_data_2d(n,n,v,argv[3],0);
-    print_data_2d(n,n,p,argv[3],0);
-    print_data_2d(n,n,q,argv[3],0);
-  }
+  //if(argc==4){
+  //  print_data_2d(n,n,u,argv[3],1);
+  //  print_data_2d(n,n,v,argv[3],0);
+  //  print_data_2d(n,n,p,argv[3],0);
+  //  print_data_2d(n,n,q,argv[3],0);
+  //}
 
-  if(argc>=5) writeOVRData(argv[4],runtime,0);
-  if(argc>=6) writeFPRData(argv[5],detectCounter,0);
+  //if(argc>=5) writeOVRData(argv[4],runtime,0);
+  //if(argc>=6) writeFPRData(argv[5],detectCounter,0);
 
-  if(detectCounter)
-   	printf("\nINFO: Soft error detected\n");
-  else
-   	printf("\nINFO: No Soft errors detected\n");
+  //if(detectCounter)
+  // 	printf("\nINFO: Soft error detected\n");
+  //else
+  // 	printf("\nINFO: No Soft errors detected\n");
 
 free(u);
 free(v);
@@ -237,4 +325,5 @@ free(q);
 #endif
 
   return 0;
+
 }
