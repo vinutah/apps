@@ -1,6 +1,6 @@
 CXX=clang++
 CC=clang
-CXX_FLAGS=-O1 -fno-inline
+CXX_FLAGS=-g -O0 -fno-inline
 
 BUILD_DIR=./bin
 #VULFI_LIB_DIR=/usr/local/lib

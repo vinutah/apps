@@ -127,6 +127,16 @@ FILE *fp_q;
       u[i*n+(n-1)] = 1.0;
 
 
+      //long long adr =(long long) &q[0] ;
+      //long long adr =(long long) q ;   /*the name of an array == base addr*/
+      for (j=n-2; j>=1;j--) {
+        if( t==tsteps/2 && i==n/2 && j==n/2 ) q = q+ BITFLIP ;
+        printf("q=%p\n",q);
+        u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
+      }
+      //q = (double *)adr ;
+
+#if 0
     if(t==tsteps/2) {
         long long adr =(long long) &q[0] ;
   	  for (j=n-2; j>=1;j--) {
@@ -139,6 +149,7 @@ FILE *fp_q;
             u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
           }
       }
+#endif
 
     //for (j=n-2; j>=1; j--) {
     //  u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
@@ -291,12 +302,12 @@ int main(int argc, char** argv)
 
   gettimeofday(&start, NULL);
 
-  if (atoi(argv[3]) == 0){
-    kernel_adi (tsteps,n,u,v,p,q);
-  } else {
-    if (atoi(argv[3]) == 1)
-  psg_kernel_adi (tsteps,n,u,v,p,q);
-  }
+ // if (atoi(argv[3]) == 0){
+ // kernel_adi (tsteps,n,u,v,p,q);
+ // } else {
+ //   if (atoi(argv[3]) == 1)
+    psg_kernel_adi (tsteps,n,u,v,p,q);
+ // }
 
   gettimeofday(&end, NULL);
   printf("Total time taken to execute the kernel: %lf seconds\n", (double) ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec))/(double)1000000);
