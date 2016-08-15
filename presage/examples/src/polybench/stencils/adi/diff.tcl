@@ -10,7 +10,7 @@ proc FileToList { source_file } {
 }
 
 
-proc CreateDiffData { faultDir psgDir } {
+proc CreateDiffData { faultDir psgDir dirName } {
 	set currDir [pwd]
 	cd $faultDir
 	set plotFiles [glob *_simData_q.dat]
@@ -24,15 +24,15 @@ proc CreateDiffData { faultDir psgDir } {
     set SecMaxIter [lindex $ListPlot [expr [llength $ListPlot] - 2]] 
     set timeInt [expr $MaxIter - $SecMaxIter]
 	cd $currDir
-	if {[file isdirectory "diffDir"]} {
-	   exec rm -rf diffDir
+	if {[file isdirectory $dirName]} {
+	   exec rm -rf $dirName
 	}
-	exec mkdir -p diffDir
+	exec mkdir -p $dirName
 	for {set i $MinIter} { $i <= $MaxIter } {incr i $timeInt} {
 		set faultList [FileToList "$faultDir\/$i\_simData_q.dat"]
 		set psgList [FileToList "$psgDir\/$i\_simData_q.dat"]
 		set listLength [llength $faultList]
-		set fopen [open "diffDir\/$i\_simData_q.dat" {RDWR CREAT APPEND}]
+		set fopen [open "$dirName\/$i\_simData_q.dat" {RDWR CREAT APPEND}]
 		for {set j 0} {$j < $listLength-1} {incr j} {
 			set var_x [lindex [lindex $faultList $j] 0]
 			set var_y [lindex [lindex $faultList $j] 1]
@@ -47,14 +47,15 @@ proc CreateDiffData { faultDir psgDir } {
 }
 
 proc main { } {
-  if {$::argc != 2} {
+  if {$::argc != 3} {
   	puts "Require faulty and psg diretory input as below"
 	puts "./generateRelative <noPsg_fault_dir> <psg_dir>"
 	exit
   } else {
-    set faultDir [lindex $::argv 0]
+        set faultDir [lindex $::argv 0]
 	set psgDir [lindex $::argv 1]
-	CreateDiffData $faultDir $psgDir
+	set dirName [lindex $::argv 2]
+	CreateDiffData $faultDir $psgDir $dirName
   }
 }
 

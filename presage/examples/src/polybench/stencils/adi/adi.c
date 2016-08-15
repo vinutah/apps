@@ -23,6 +23,8 @@
 /* Include benchmark-specific header. */
 #include "adi.h"
 
+int ARGV;
+
 extern long long dim0;
 extern long long dim1;
 extern long long dim2;
@@ -32,6 +34,8 @@ extern long long detectCounter;
 #ifdef INST
 //extern int printFaultSitesData(void);
 //extern int printFaultInjectionData(void);
+
+//int ARGC;
 
 void flipBit(void* data,unsigned bytesz,int bitPos){
 	long long dest = 0;
@@ -236,12 +240,17 @@ FILE *fp_q;
       u[i*n+(n-1)] = 1.0;
 
       for (j=n-2; j>=1; j--) {
+      
+      if(ARGV){  
 	    if(t==tsteps/2 && i==n/2 && j==n/2) {
 		   long long adr = (long long)&q[i*n + j] ;
 		   adr = adr+BITFLIP ;
 		   q[i*n + j] = *(double *)adr ;
 		}
-        u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
+      }
+
+      u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
+      
       }
 
       //for (j=n-2; j>=1; j--) {
@@ -277,6 +286,8 @@ int main(int argc, char** argv)
 	  printf("\nINFO: Insufficient arguments!\n\n");
   }
   
+  //ARGC = argc;
+
   int n = atoi(argv[1]);
   int tsteps = atoi(argv[2]);
   
@@ -302,12 +313,14 @@ int main(int argc, char** argv)
 
   gettimeofday(&start, NULL);
 
- // if (atoi(argv[3]) == 0){
- // kernel_adi (tsteps,n,u,v,p,q);
- // } else {
- //   if (atoi(argv[3]) == 1)
-    psg_kernel_adi (tsteps,n,u,v,p,q);
- // }
+  if(argc==5 && atoi(argv[4])==1)  ARGV = 1;
+
+  if (atoi(argv[3]) == 0){
+  kernel_adi (tsteps,n,u,v,p,q);
+  } else {
+    if (atoi(argv[3]) == 1)
+  psg_kernel_adi (tsteps,n,u,v,p,q);
+  }
 
   gettimeofday(&end, NULL);
   printf("Total time taken to execute the kernel: %lf seconds\n", (double) ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec))/(double)1000000);
