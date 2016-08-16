@@ -205,6 +205,12 @@ FILE *fp_q;
   double mul1, mul2;
   double a, b, c, d, e, f;
 
+    char buffer_u[40] ;
+    char buffer_v[40] ;
+    char buffer_p[40] ;
+    char buffer_q[40] ;
+
+
 #pragma scop
 
   DX = 1.0/(double)n;
@@ -269,21 +275,38 @@ FILE *fp_q;
       //}
     
     }
-
-    char buffer_q[40] ;
+    
+    sprintf(buffer_u, "%d", t);
+    sprintf(buffer_v, "%d", t);
+    sprintf(buffer_p, "%d", t);
     sprintf(buffer_q, "%d", t);
+    
+    strcat(buffer_u, "_simData_u.dat");
+    strcat(buffer_v, "_simData_v.dat");
+    strcat(buffer_p, "_simData_p.dat");
     strcat(buffer_q, "_simData_q.dat");
+    
+    fp_u = fopen(buffer_u, "wb");
+    fp_v = fopen(buffer_v, "wb");
+    fp_p = fopen(buffer_p, "wb");
     fp_q = fopen(buffer_q, "wb");
+
     
     for(int i=0; i<n; i++) {
       for(int j=0; j<n; j++) {
+          fprintf(fp_u, "%d %d %lf\n", i, j, u[i*n + j]) ;
+          fprintf(fp_v, "%d %d %lf\n", i, j, v[i*n + j]) ;
+          fprintf(fp_p, "%d %d %lf\n", i, j, p[i*n + j]) ;
           fprintf(fp_q, "%d %d %lf\n", i, j, q[i*n + j]) ;
       }
     }
 
+    fclose(fp_u);
+    fclose(fp_v);
+    fclose(fp_p);
     fclose(fp_q);
-
-  }
+  }    
+ 
 #pragma endscop
 }
 
@@ -311,10 +334,12 @@ int main(int argc, char** argv)
   double *p=(double*)malloc(n*n*sizeof(double));
   double *q=(double*)malloc(n*n*sizeof(double));
 
+#if 0
   psgProtect(u,(long long) &u[0],(long long) &u[(n*n)-1]);
   psgProtect(v,(long long) &v[0],(long long) &v[(n*n)-1]);
   psgProtect(p,(long long) &p[0],(long long) &p[(n*n)-1]);
   psgProtect(q,(long long) &q[0],(long long) &q[(n*n)-1]);
+#endif
 
     /* Initialize array(s). */
   init_array (n,u);
