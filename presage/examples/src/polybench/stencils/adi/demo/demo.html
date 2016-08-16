@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta name="generator" content="Madoko, version 1.0.1" />
+  <meta name="viewport" content="initial-scale=1.0" />
+  <meta name="author" content="Demo using Polybench/C : **A**lternate **D**irection **I**mplicit Solver" />
+  <title>PRESAGE</title>
+  <style type="text/css"  class="link">
+  /*# sourceURL=madoko.css */
+  
+  .madoko .toc>.tocblock .tocblock .tocblock {
+    margin-left: 2.25em;
+  }
+  .madoko .toc>.tocblock .tocblock {
+    margin-left: 1.5em;
+  }
+  .madoko .toc-contents>.tocblock>.tocitem {
+    font-weight: bold;
+  }
+  .madoko .toc {
+    margin-top: 1em;
+  }
+  .madoko p.para-continue {
+    margin-bottom: 0pt;
+  }
+  .madoko .para-block+p {
+    margin-top: 0pt;
+  }
+  .madoko ul.para-block, .madoko ol.para-block {
+    margin-top: 0pt;
+    margin-bottom: 0pt;
+  }
+  .madoko ul.para-end, .madoko ol.para-end {
+    margin-bottom: 1em;
+  }
+  .madoko dl {
+    margin-left: 0em;
+  }
+  .madoko blockquote {
+    font-style: italic;
+  }
+  .madoko a.localref {
+    text-decoration: none;
+  }
+  .madoko a.localref:hover {
+    text-decoration: underline;
+  }
+  .madoko .footnotes {
+    font-size: smaller;
+    margin-top: 2em;
+  }
+  .madoko .footnotes hr {
+    width: 50%;
+    text-align: left;
+  }
+  .madoko .footnote { 
+    margin-left: 1em;
+  }
+  .madoko .footnote-before {
+    margin-left: -1em;
+    width: 1em;
+    display: inline-block;
+  }
+  .madoko .align-center, .madoko .align-center>p {
+    text-align: center !important;
+  }
+  .madoko .align-center pre {
+    text-align: left;
+  }
+  .madoko .align-center>* {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .madoko .align-left, .madoko .align-left>p {
+    text-align: left !important;
+  }
+  .madoko .align-left>* {
+    margin-left: 0pt !important;
+    margin-right: auto !important;
+  }
+  .madoko .align-right, .madoko .align-right>p {
+    text-align: right !important;
+  }
+  .madoko .align-right>* {
+    margin-left: auto !important;
+    margin-right: 0pt !important;
+  }
+  .madoko .align-center>table,
+  .madoko .align-left>table,
+  .madoko .align-right>table {
+    text-align: left !important;
+  }
+  .madoko .equation-before {
+    float: right;
+  }
+  .madoko .bibitem {
+    font-size: smaller;
+  }
+  .madoko .bibsearch {
+    font-size: x-small;
+    text-decoration:none;
+    color: black;
+    font-family: "Segoe UI Symbol", Symbola, serif;
+  }
+  .madoko .block, .madoko .figure, .madoko .bibitem, .madoko .equation, .madoko div.math {
+    margin-top: 1ex;
+    margin-bottom: 1ex;
+  }
+  .madoko .figure {
+    padding: 0.5em;
+    margin-left: 0pt;
+    margin-right: 0pt;
+  }
+  .madoko .hidden {
+    display: none;
+  }
+  .madoko .invisible {
+    visibility: hidden;
+  }
+  .madoko.preview .invisible {
+    visibility: visible;
+    opacity: 0.5;
+  }
+  .madoko code.code, .madoko span.code {
+    white-space: pre-wrap;
+  }
+  .madoko hr, hr.madoko {
+    border: none;
+    border-bottom: black solid 1px;
+    margin-bottom: 0.5ex;
+  }
+  .madoko .framed>*:first-child {
+    margin-top: 0pt;
+  }
+  .madoko .framed>*:last-child {
+    margin-bottom: 0pt;
+  }
+  .madoko ul.list-style-type-dash {
+      list-style-type: none !important;
+  }
+  .madoko ul.list-style-type-dash > li:before {
+      content: "\2013"; 
+      position: absolute;
+      margin-left: -1em; 
+  }
+  .madoko table.madoko {
+    border-collapse: collapse;
+  }
+  .madoko td, .madoko th {
+    padding: 0ex 0.5ex;
+    margin: 0pt;
+    vertical-align: top;
+  }
+  .madoko .cell-border-left {
+    border-left: 1px solid black;
+  }
+  .madoko .cell-border-right {
+    border-right: 1px solid black;
+  }
+  .madoko thead>tr:first-child>.cell-line,
+  .madoko tbody:first-child>tr:first-child>.cell-line {
+    border-top: 1px solid black;
+    border-bottom: none;
+  }
+  .madoko .cell-line, .madoko .cell-double-line {
+    border-bottom: 1px solid black;
+    border-top: none;
+  }
+  .madoko .cell-double-line {
+    border-top: 1px solid black;
+    padding-top: 1.5px !important;
+  }
+  .madoko .input-mathpre .MathJax_Display {
+    text-align: left !important;
+  }
+  .madoko div.input-mathpre {
+    text-align: left;
+    margin-top: 1.5ex;
+    margin-bottom: 1ex;
+  }
+  .madoko .math-rendering {
+    color: gray;
+  }
+  .madoko .mathdisplay {
+    text-align: center;
+  }
+  .madoko .pretty table {
+    border-collapse: collapse;
+  }
+  .madoko .pretty td {
+    padding: 0em;
+  }
+  .madoko .pretty td.empty {
+    min-width: 1.5ex;
+  }
+  .madoko .pretty td.expander {
+    width: 100em;
+  }
+  body.madoko, .madoko .serif {
+    font-family: Cambria,"Times New Roman","Liberation Serif","Times",serif;
+  }
+  .madoko .sans-serif {
+    font-family: "Calibri", "Optima", sans-serif;
+  }
+  .madoko .symbol {
+    font-family: "Segoe UI Symbol", Symbola, serif;
+  }
+  body.madoko {  
+    -webkit-text-size-adjust: 100%;       
+    text-rendering: optimizeLegibility;
+  }
+  body.madoko {
+    max-width: 88ex; 
+    margin: 1em auto;
+    padding: 0em 2em;  
+  }
+  body.preview.madoko {
+    padding: 0em 1em;
+  }
+  .madoko p {
+    text-align: justify;
+  }
+  .madoko h1, .madoko h2, .madoko h3, .madoko h4 { 
+    margin-top: 1.22em; 
+    margin-bottom: 1ex;
+  }
+  .madoko h1+p, .madoko h2+p, .madoko h3+p, .madoko h4+p, .madoko h5+p  { 
+    margin-top: 1ex;    
+  }
+  .madoko h5, .madoko h6 { 
+    margin-top: 1ex;
+    font-size: 1em;
+  }
+  .madoko h5 { 
+    margin-bottom: 0.5ex;
+  }
+  .madoko h5 + p {
+    margin-top: 0.5ex;
+  }
+  .madoko h6 { 
+    margin-bottom: 0pt;
+  }
+  .madoko h6 + p {
+    margin-top: 0pt;
+  }
+  .madoko pre, .madoko code, .madoko kbd, .madoko samp, .madoko tt, 
+  .madoko .monospace, .madoko .token-indent, .madoko .reveal pre, .madoko .reveal code, .madoko .email {
+    font-family: Consolas,"Andale Mono WT","Andale Mono",Lucida Console,Monaco,monospace,monospace;
+    font-size: 0.85em;
+  }
+  .madoko pre code, .madoko .token-indent {
+    font-size: 0.95em;
+  }
+  .madoko pre code {
+    font-family: inherit !important;
+  }
+  .madoko ol.linenums li {
+    background-color: white;
+    list-style-type: decimal;
+  }
+  .madoko .remote {
+    background-color: #F0FFF0;
+  }
+  .madoko .remote + * {
+    margin-top: 0pt;
+  }
+  @media print {
+    body.madoko {
+      font-size: 10pt;
+    }
+    @page {
+      margin: 1in 1.5in;
+    }
+  }
+  @media only screen and (max-device-width:1024px) {
+    body.madoko {
+      padding: 0em 0.5em;    
+    }
+    .madoko li {
+      text-align: left;
+    }
+  }
+  
+    </style>
+  
+  </head>
+<body class="madoko">
+
+<div class="body madoko" style="line-adjust:0">
+<style>
+    body.madoko {
+      max-width: 75pc; 
+    }   
+</style>
+
+
+
+
+<div class="titleblock align-center para-block" style="text-align:center;line-adjust:0">
+<div class="titleheader align-center" style="text-align:center;line-adjust:0">
+<div class="title para-block" style="font-size:xx-large;font-weight:bold;margin-bottom:0.5ex;line-adjust:0">PRESAGE</div></div>
+<div class="authors align-center" style="text-align:center;width:80%;line-adjust:0"><table class="authorrow columns block" style="margin-top:2ex;width:100%;line-adjust:0">
+<tbody><tr><td class="author column" style="text-align:center;line-adjust:0">
+<div class="authorname" style="font-size:large;line-adjust:0"><strong class="strong-star2">PR</strong>ot<strong class="strong-star2">E</strong>ting <strong class="strong-star2">S</strong>tructured <strong class="strong-star2">A</strong>ddress <strong class="strong-star2">G</strong>eneration against Soft <strong class="strong-star2">E</strong>rrors</div></td><td class="author column" style="text-align:center;line-adjust:0">
+<div class="authorname" style="font-size:large;line-adjust:0">Demo using Polybench/C : <strong class="strong-star2">A</strong>lternate <strong class="strong-star2">D</strong>irection <strong class="strong-star2">I</strong>mplicit Solver</div></td></tr></tbody></table></div></div><h2 id="sec-adi-kernel-poly" class="h1" data-heading-depth="1" style="display:block"><span class="heading-before"><span class="heading-label">1</span>.&#8194;</span>ADI KERNEL&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#poly" title="The polybench benchmark suite,
+Polybench/C, 2012" class="bibref localref" style="target-element:bibitem"><span class="cite-number">1</span></a>]</span></h2>
+<pre class="para-block pre-fenced pre-fenced3 language-javascript lang-javascript javascript colorized" style="display:block"><code> <span style="color:blue">for</span> (t=<span class="constant" style="color:purple">1</span>; t&lt;=tsteps; t++) {
+    <span style="color:darkgreen">//Column Sweep</span>
+    <span style="color:blue">for</span> (i=<span class="constant" style="color:purple">1</span>; i&lt;n-<span class="constant" style="color:purple">1</span>; i++) {
+      v[i] = <span class="constant" style="color:purple">1.0</span>;
+      p[i*n] = <span class="constant" style="color:purple">0.0</span>;
+      q[i*n] = v[i];
+      <span style="color:blue">for</span> (j=<span class="constant" style="color:purple">1</span>; j&lt;n-<span class="constant" style="color:purple">1</span>; j++) {
+        p[i*n+j] = -c / (a*p[i*n+(j-<span class="constant" style="color:purple">1</span>)]+b);
+        q[i*n+j] = ( -d*u[j*n+(i-<span class="constant" style="color:purple">1</span>)]+(<span class="constant" style="color:purple">1.0</span>+<span class="constant" style="color:purple">2.0</span>*d)*u[j*n+i] - 
+                     f*u[j*n+(i+<span class="constant" style="color:purple">1</span>)]
+                     -a*q[i*n+(j-<span class="constant" style="color:purple">1</span>)])/(a*p[i*n+(j-<span class="constant" style="color:purple">1</span>)]+b );
+      }
+      
+      v[n*(n-<span class="constant" style="color:purple">1</span>)+i] = <span class="constant" style="color:purple">1.0</span>;
+      <span style="color:blue">for</span> (j=n-<span class="constant" style="color:purple">2</span>; j&gt;=<span class="constant" style="color:purple">1</span>; j--) {
+        v[j*n+i] = p[i*n+j] * v[(j+<span class="constant" style="color:purple">1</span>)*n+i] + q[i*n+j];
+      }
+    }
+
+    <span style="color:darkgreen">//Row Sweep</span>
+    <span style="color:blue">for</span> (i=<span class="constant" style="color:purple">1</span>; i&lt;n-<span class="constant" style="color:purple">1</span>; i++) {
+      u[i*n] = <span class="constant" style="color:purple">1.0</span>;
+      p[i*n] = <span class="constant" style="color:purple">0.0</span>;
+      q[i*n] = u[i*n];
+      <span style="color:blue">for</span> (j=<span class="constant" style="color:purple">1</span>; j&lt;n-<span class="constant" style="color:purple">1</span>; j++) {
+        p[i*n+j] = -f / (d*p[i*n+(j-<span class="constant" style="color:purple">1</span>)]+e);
+        q[i*n+j] = ( -a*v[(i-<span class="constant" style="color:purple">1</span>)*n+j]+(<span class="constant" style="color:purple">1.0</span>+<span class="constant" style="color:purple">2.0</span>*a)*v[i*n+j] 
+                     -c*v[(i+<span class="constant" style="color:purple">1</span>)*n+j]
+                     -d*q[i*n+(j-<span class="constant" style="color:purple">1</span>)])/(d*p[i*n+(j-<span class="constant" style="color:purple">1</span>)]+e );
+      }
+      u[i*n+(n-<span class="constant" style="color:purple">1</span>)] = <span class="constant" style="color:purple">1.0</span>;
+
+      <span style="color:blue">for</span> (j=n-<span class="constant" style="color:purple">2</span>; j&gt;=<span class="constant" style="color:purple">1</span>; j--) {
+            u[i*n+j] = p[i*n+j] * u[i*n+(j+<span class="constant" style="color:purple">1</span>)] + q[i*n+j];
+      }
+    }    </code></pre><h3 id="sec-initial-conditions" class="h2" data-heading-depth="2" style="display:block"><span class="heading-before"><span class="heading-label">1.1</span>.&#8194;</span>Initial Conditions</h3>
+<p class="p noindent">The adi kernel shown above is timesteped simulation and its initialized using:
+</p>
+<pre class="para-block pre-fenced pre-fenced3 language-javascript lang-javascript javascript colorized" style="display:block"><code><span style="color:darkgreen">/*</span><span style="color:darkgreen"> Array initialization. </span><span style="color:darkgreen">*/</span>
+<span style="color:blue">void</span> init_array (<span style="color:blue">int</span> n,<span style="color:blue">double</span> *u)
+{
+  <span style="color:blue">int</span> i, j;
+  srand(<span class="constant" style="color:purple">0</span>);
+  <span style="color:blue">for</span> (i = <span class="constant" style="color:purple">0</span>; i &lt; n; i++)
+    <span style="color:blue">for</span> (j = <span class="constant" style="color:purple">0</span>; j &lt; n; j++)
+      {
+        u[i*n+j] =  (<span style="color:blue">double</span>) rand(); 
+      }
+}</code></pre><h3 id="sec-boundary-conditions" class="h2" data-heading-depth="2" style="display:block"><span class="heading-before"><span class="heading-label">1.2</span>.&#8194;</span>Boundary Conditions</h3>
+<p class="p noindent">The kernel [<a href="#sec-adi-kernel-poly" title="1.&#8194;ADI KERNEL&nbsp;[&lt;a href=&quot;#poly&quot; title=&quot;The polybench benchmark suite,
+Polybench/C, 2012&quot; class=&quot;bibref localref&quot; style=&quot;target-element:bibitem&quot;&gt;1]" class="localref" style="target-element:h1"><span class="heading-label">1</span></a>] maintains the boundary condition of <code class="code code1">u,q,p and v</code> internally.
+</p><h3 id="sec-output" class="h2" data-heading-depth="2" style="display:block"><span class="heading-before"><span class="heading-label">1.3</span>.&#8194;</span>Output</h3>
+<p class="p noindent">This kernel generates <code class="code code1">four</code> 2D arrays, <code class="code code1">u,q,p and v</code> for each timestep and in the plots below, we visualize these arryas for: 
+</p>
+<pre class="para-block pre-fenced pre-fenced3 language-javascript lang-javascript javascript colorized" style="display:block"><code>TimeSteps: <span class="constant" style="color:purple">60</span>
+Dimentions: (X=<span class="constant" style="color:purple">25</span>,Y=<span class="constant" style="color:purple">25</span>)</code></pre><h2 id="sec-visualizations" class="h1" data-heading-depth="1" style="display:block"><span class="heading-before"><span class="heading-label">2</span>.&#8194;</span>VISUALIZATIONS</h2><h3 id="sec-native-simulation" class="h2" data-heading-depth="2" style="display:block"><span class="heading-before"><span class="heading-label">2.1</span>.&#8194;</span>NATIVE SIMULATION</h3>
+<p class="p noindent"><strong class="strong-star2">u</strong> <img src="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/images/native_u.gif" title="native_u" alt="native_u" data-path="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/images/native_u.gif" data-linkid="native_u" style="width:auto;max-width:39%;vertical-align:middle"> <strong class="strong-star2">q</strong> <img src="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/images/native_q.gif" title="native_q" alt="native_q" data-path="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/images/native_q.gif" data-linkid="native_q" style="width:auto;max-width:39%;vertical-align:middle"><br>
+<strong class="strong-star2">p</strong> <img src="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/images/native_p.gif" title="native" alt="native_p" data-path="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/images/native_p.gif" data-linkid="native_p" style="width:auto;max-width:39%;vertical-align:middle"> <strong class="strong-star2">v</strong> <img src="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/images/native_v.gif" title="native_v" alt="native_v" data-path="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/images/native_v.gif" data-linkid="native_v" style="width:auto;max-width:39%;vertical-align:middle"> 
+</p><h3 id="sec-fault-injection" class="h2" data-heading-depth="2" style="display:block"><span class="heading-before"><span class="heading-label">2.2</span>.&#8194;</span>FAULT INJECTION</h3>
+<p class="p noindent">Among the <code class="code code1">four</code> output arrays <code class="code code1">[u,q,p,v]</code>, we randomly choose an array <code class="code code1">[q]</code> to perform <code class="code code1">fault injection</code>.
+For the sake of visualization, we perform deterministic <em class="em-star1">fault injection</em> at a <code class="code code1">Fixed-Timestep:30</code> and at the center of the <code class="code code1">2D array</code>. Here <em class="em-star1">fault injection</em> refers to a single bit-flip in the address of <code class="code code1">q[i/2,j/2]</code> at <code class="code code1">Timesteps/2</code>
+</p>
+<p class="p indent">The difference between the output array <code class="code code1">q</code> generated by the native kernel and fault-injected kernel is plotted as <strong class="strong-star2">DNF</strong> below on the left.
+</p><h3 id="sec-fault-injection-presage" class="h2" data-heading-depth="2" style="display:block"><span class="heading-before"><span class="heading-label">2.3</span>.&#8194;</span>FAULT INJECTION + PRESAGE</h3>
+<p class="p noindent">The kernel shown in Section&nbsp;<a href="#sec-adi-kernel-poly" title="1.&#8194;ADI KERNEL&nbsp;[&lt;a href=&quot;#poly&quot; title=&quot;The polybench benchmark suite,
+Polybench/C, 2012&quot; class=&quot;bibref localref&quot; style=&quot;target-element:bibitem&quot;&gt;1]" class="localref" style="target-element:h1"><span class="heading-label">1</span></a> is setup for transformation using&nbsp;<span class="citations" style="target-element:bibitem">[<a href="#psg" title="PRESAGE: Protecting Structured Address Generation against Soft Errors
+Sharma, Gopalakrishnan, and Krishnamoorthy, 2016" class="bibref localref" style="target-element:bibitem"><span class="cite-number">2</span></a>]</span> and the difference between the native output q and the array generated by this transformation is plotted in right, below as <strong class="strong-star2">DNP</strong> 
+</p>
+<p class="p indent"><strong class="strong-star2">DNF</strong>: <strong class="strong-star2">D</strong>ifference between <strong class="strong-star2">N</strong>ative and <strong class="strong-star2">F</strong>ault Injection on Native Binary<br>
+<strong class="strong-star2">DNP</strong>:  <strong class="strong-star2">D</strong>ifference between <strong class="strong-star2">N</strong>ative and Fault Injection on <strong class="strong-star2">P</strong>resage transformed Binary  
+</p>
+<p class="p indent">Notice the <code class="code code1">Value</code> axis of <strong class="strong-star2">DNP</strong> , the single event upset to the <code class="code code1">&amp;q[i/2,j/2]</code> causes the data corruption to be evident by diverging to the range <code class="code code1">10e6</code> 
+</p>
+<p class="p indent"><strong class="strong-star2">DNF</strong> <img src="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/images/dnf.gif" title="dnf" alt="dnf" data-path="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/images/dnf.gif" data-linkid="dnf" style="width:auto;max-width:39%;vertical-align:middle"> <strong class="strong-star2">DNP</strong> <img src="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/images/dnp.gif" title="dnp" alt="dnp" data-path="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/images/dnp.gif" data-linkid="dnp" style="width:auto;max-width:39%;vertical-align:middle">  
+</p>
+<div class="bibl" style="bbl-file:out/demo-bib.bbl.mdk"><h2 id="sec-references" class="clearnum h1 heading-references" data-heading-depth="1" style="display:block">References</h2>
+<div class="bibliography bib-numeric" data-hanging-indent="0" data-cite-style="numeric:&#39;[&#39;,&#39;]&#39;,&#39;, &#39;" data-style="madoko-numeric" style="bibstyle:madoko-numeric">
+<div id="poly" class="bibitem" data-cite-year="2012" data-cite-authors="Polybench/C" data-cite-authors-long="Polybench/C" data-cite-label="1" data-line="presage.bib:1" style="text-indent:-2rem;margin-left:2rem;searchterm:The%20polybench%20benchmark%20suite%2C%20Polybench%2FC%2C%202012;bibitem-label:\5C [1\5C ]"><span class="bibitem-before" style="padding-right:0.5em;display: inline-block; width:calc(2rem - 0.5em);display: inline-block; text-align:right;font-size:90%">[1]</span>Polybench/C.&#160;<em class="em-low1">The Polybench Benchmark Suite,</em>. http://web.cse.ohio-state.edu/&#160;pouchet/software/polybench/#download. 2012.&nbsp;<a href="http://www.bing.com/search?q=The%20polybench%20benchmark%20suite%2C%20Polybench%2FC%2C%202012" class="bibsearch">&#128270;</a></div>
+<div id="psg" class="bibitem" data-cite-year="2016" data-cite-authors="Sharma et al." data-cite-authors-long="Sharma, Gopalakrishnan, and Krishnamoorthy" data-cite-label="2" data-line="presage.bib:8" style="text-indent:-2rem;margin-left:2rem;searchterm:PRESAGE%3A%20Protecting%20Structured%20Address%20Generation%20against%20Soft%20Errors%20Sharma%2C%20Gopalakrishnan%2C%20and%20Krishnamoorthy%2C%202016;bibitem-label:\5C [2\5C ]"><span class="bibitem-before" style="padding-right:0.5em;display: inline-block; width:calc(2rem - 0.5em);display: inline-block; text-align:right;font-size:90%">[2]</span>Vishal Chandra Sharma, Ganesh Gopalakrishnan, and Sriram Krishnamoorthy. &#8220;PRESAGE: Protecting Structured Address Generation against Soft Errors.&#8221; <em class="em-low1">CoRR</em> abs/1606.08948. 2016. <a href="http://arxiv.org/abs/1606.08948" class="bib-url texturl monospace">http://&#8203;arxiv.&#8203;org/&#8203;abs/&#8203;1606.&#8203;08948</a>.&nbsp;<a href="http://www.bing.com/search?q=PRESAGE%3A%20Protecting%20Structured%20Address%20Generation%20against%20Soft%20Errors%20Sharma%2C%20Gopalakrishnan%2C%20and%20Krishnamoorthy%2C%202016" class="bibsearch">&#128270;</a></div></div></div><span data-line=""></span></div>
+</body>
+
+</html>
