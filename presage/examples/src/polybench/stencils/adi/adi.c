@@ -135,20 +135,20 @@ FILE *fp_q;
 
 
       //long long adr =(long long) &q[0] ;
-      long long adr =(long long) q ;   /*the name of an array == base addr*/
+      //long long adr =(long long) q ;   /*the name of an array == base addr*/
       for (j=n-2; j>=1;j--) {
         if( t==tsteps/2 && i==n/2 && j==n/2 ) //q = q+ BITFLIP ;
         //printf("psg- %p\n", q);
         {
           q1 = q + BITFLIP;
-          printf("psg- %lf\n", q1);
+          //printf("psg- %lu\n", q1);
           //*q = *q1;
           q[i*n+j] = q1[i*n+j];
-          printf("psg- %lf\n", q[i*n+j]);
+          //printf("psg- %lu\n", q[i*n+j]);
         }
         u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
       }
-      q = (double *)adr ;
+      //q = (double *)adr ;
 
 #if 0
     if(t==tsteps/2) {
