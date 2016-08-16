@@ -1,0 +1,100 @@
+Title         : PRESAGE
+Author        : **PR**ot**E**ting **S**tructured **A**ddress **G**eneration against Soft **E**rrors
+Author        : Demo using Polybench/C : **A**lternate **D**irection **I**mplicit Solver
+Bibliography: presage.bib
+
+<style>
+    body.madoko {
+      max-width: 75pc; 
+    }   
+</style>
+
+
+[TITLE]
+
+# Alternating Direction Implicit [@WikiArticle]
+
+In numerical analysis, the Alternating Direction Implicit (ADI) method is a finite difference method for solving parabolic, hyperbolic and elliptic partial differential equations. It is most notably used to solve the problem of heat conduction or solving the diffusion equation in two or more dimensions. It is an example of an operator splitting method.
+
+**ADI Stencil** [@WikiAdiSvg] ![svg] 
+
+
+
+
+# ADI Kernal
+
+```javascript
+ for (t=1; t<=tsteps; t++) {
+    //Column Sweep
+    for (i=1; i<n-1; i++) {
+      v[i] = 1.0;
+      p[i*n] = 0.0;
+      q[i*n] = v[i];
+      for (j=1; j<n-1; j++) {
+        p[i*n+j] = -c / (a*p[i*n+(j-1)]+b);
+        q[i*n+j] = (-d*u[j*n+(i-1)]+(1.0+2.0*d)*u[j*n+i] - f*u[j*n+(i+1)]-a*q[i*n+(j-1)])/(a*p[i*n+(j-1)]+b);
+      }
+      
+      v[n*(n-1)+i] = 1.0;
+      for (j=n-2; j>=1; j--) {
+        v[j*n+i] = p[i*n+j] * v[(j+1)*n+i] + q[i*n+j];
+      }
+    }
+
+    //Row Sweep
+    for (i=1; i<n-1; i++) {
+      u[i*n] = 1.0;
+      p[i*n] = 0.0;
+      q[i*n] = u[i*n];
+      for (j=1; j<n-1; j++) {
+        p[i*n+j] = -f / (d*p[i*n+(j-1)]+e);
+        q[i*n+j] = (-a*v[(i-1)*n+j]+(1.0+2.0*a)*v[i*n+j] - c*v[(i+1)*n+j]-d*q[i*n+(j-1)])/(d*p[i*n+(j-1)]+e);
+      }
+      u[i*n+(n-1)] = 1.0;
+
+      for (j=n-2; j>=1; j--) {
+            u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
+      }
+    }    
+```
+
+
+
+# Native Simulation
+
+```javascript
+TimeSteps: 60
+Dimentions: (X=25,Y=25)
+```
+
+**u** ![native_u] **q** ![native_q]  
+**p** ![native_p] **v** ![native_v] 
+
+# Fault Injection
+
+**DNF** ![dnf] **DNP** ![dnp]  
+
+**DNF**: Difference between Native and Fault Injection on Native Binary  
+**DNP**:  Difference between Native and Fault Injection on Presage transformed Binary  
+**TODO** : Add Blurb
+```
+
+[BIB]
+
+
+
+[svg]: https://upload.wikimedia.org/wikipedia/commons/8/82/ADI-stencil.svg "svg" { width:auto; max-width:49%; vertical-align:middle }
+
+[native_u]: http://www.cs.utah.edu/~vinu/research/stencils/presage/gif/native_u.gif "native_u" { width:auto; max-width:39%; vertical-align:middle }
+
+[native_q]: http://www.cs.utah.edu/~vinu/research/stencils/presage/gif/native_q.gif "native_q" { width:auto; max-width:39%; vertical-align:middle }
+
+[native_p]: http://www.cs.utah.edu/~vinu/research/stencils/presage/gif/native_p.gif "native" { width:auto; max-width:39%; vertical-align:middle }
+
+[native_v]: http://www.cs.utah.edu/~vinu/research/stencils/presage/gif/native_v.gif "native_v" { width:auto; max-width:39%; vertical-align:middle }
+
+
+[dnf]: http://www.cs.utah.edu/~vinu/research/stencils/presage/gif/dnf.gif "dnf" {width:auto; max-width:39%; vertical-align:middle; caption:"test"; }
+
+[dnp]: http://www.cs.utah.edu/~vinu/research/stencils/presage/gif/dnp.gif "dnp" {width:auto; max-width:39%; vertical-align:middle}
+
