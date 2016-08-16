@@ -43,6 +43,8 @@ proc GenerateSH { fileName simuName } {
  #puts $fopen "set yrange \[0:2\]"
  #puts $fopen "set zrange \[0:2\]"
  puts $fopen "set grid"
+ #puts $fopen "set key font \"Sans,20\""
+ puts $fopen "set key textcolor \"blue\"" 
 # puts $fopen "set xtics axis" 
 # puts $fopen "set ytics axis"
 # puts $fopen "set ztics axis"
