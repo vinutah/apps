@@ -1,6 +1,6 @@
 CXX=clang++
 CC=clang
-CXX_FLAGS=-g -O0 -fno-inline
+CXX_FLAGS=-O1 -fno-inline
 
 BUILD_DIR=./bin
 #VULFI_LIB_DIR=/usr/local/lib
@@ -15,7 +15,7 @@ LIBS = -lm
 
 all: mkd exe
 
-exe: exe_org exe_dti_gep 
+exe: exe_org exe_dti_gep ir_dmp 
 #exe_ori_gep exe_ori_idx exe_prf exe_pri_gep exe_pri_idx \
 #exe_dtr exe_dtr_ty1 exe_dtr_ty2 exe_dti_gep exe_dti_idx
 
@@ -151,14 +151,15 @@ bc_dti_idx: bc_dtc
 	$(BUILD_DIR)/$(EX_NAME)_dti_idx.bc
 	
 
-#~ ir_dmp:
-#~ 	llvm-dis $(BUILD_DIR)/$(EX_NAME).bc -o $(BUILD_DIR)/$(EX_NAME).ll
-#~ 	llvm-dis $(BUILD_DIR)/$(EX_NAME)_psg_prf.bc -o $(BUILD_DIR)/$(EX_NAME)_prf.ll
-#~ 	llvm-dis $(BUILD_DIR)/$(EX_NAME)_psg_dtr.bc -o $(BUILD_DIR)/$(EX_NAME)_dtr.ll
-#~ 	objdump -d $(BUILD_DIR)/$(EX_NAME) > $(BUILD_DIR)/$(EX_NAME).s
-#~ 	objdump -d $(BUILD_DIR)/$(EX_NAME)_psg_dtr > $(BUILD_DIR)/$(EX_NAME)_dtr.s
-#~ 	objdump -d $(BUILD_DIR)/$(EX_NAME)_"addr"_ipsg_dtr > $(BUILD_DIR)/$(EX_NAME)_idtr.s
-#~ 	objdump -d $(BUILD_DIR)/$(EX_NAME)_"addr"_inject > $(BUILD_DIR)/$(EX_NAME)_inject.s
+ir_dmp:
+	llvm-dis $(BUILD_DIR)/$(EX_NAME).bc -o $(BUILD_DIR)/$(EX_NAME).ll
+	llvm-dis $(BUILD_DIR)/$(EX_NAME)_dti_gep.bc -o $(BUILD_DIR)/$(EX_NAME)_dti_gep.ll
+#	llvm-dis $(BUILD_DIR)/$(EX_NAME)_psg_prf.bc -o $(BUILD_DIR)/$(EX_NAME)_prf.ll
+# 	llvm-dis $(BUILD_DIR)/$(EX_NAME)_psg_dtr.bc -o $(BUILD_DIR)/$(EX_NAME)_dtr.ll
+# 	objdump -d $(BUILD_DIR)/$(EX_NAME) > $(BUILD_DIR)/$(EX_NAME).s
+# 	objdump -d $(BUILD_DIR)/$(EX_NAME)_psg_dtr > $(BUILD_DIR)/$(EX_NAME)_dtr.s
+# 	objdump -d $(BUILD_DIR)/$(EX_NAME)_"addr"_ipsg_dtr > $(BUILD_DIR)/$(EX_NAME)_idtr.s
+# 	objdump -d $(BUILD_DIR)/$(EX_NAME)_"addr"_inject > $(BUILD_DIR)/$(EX_NAME)_inject.s
 
 exe_org: bc_exp
 	$(CC) $(CXX_FLAGS)  \
