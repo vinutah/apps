@@ -76,6 +76,9 @@ void init_array (int n,double *u)
 static
 void psg_kernel_adi(int tsteps, int n,double *u,double *v,double *p,double *q)
 {
+
+double *q1;
+
 FILE *fp_u;  
 FILE *fp_v;
 FILE *fp_p;
@@ -132,13 +135,20 @@ FILE *fp_q;
 
 
       //long long adr =(long long) &q[0] ;
-      //long long adr =(long long) q ;   /*the name of an array == base addr*/
+      long long adr =(long long) q ;   /*the name of an array == base addr*/
       for (j=n-2; j>=1;j--) {
-        if( t==tsteps/2 && i==n/2 && j==n/2 ) q = q+ BITFLIP ;
-        printf("q=%p\n",q);
+        if( t==tsteps/2 && i==n/2 && j==n/2 ) //q = q+ BITFLIP ;
+        //printf("psg- %p\n", q);
+        {
+          q1 = q + BITFLIP;
+          printf("psg- %lf\n", q1);
+          //*q = *q1;
+          q[i*n+j] = q1[i*n+j];
+          printf("psg- %lf\n", q[i*n+j]);
+        }
         u[i*n+j] = p[i*n+j] * u[i*n+(j+1)] + q[i*n+j];
       }
-      //q = (double *)adr ;
+      q = (double *)adr ;
 
 #if 0
     if(t==tsteps/2) {
@@ -246,6 +256,7 @@ FILE *fp_q;
 		   long long adr = (long long)&q[i*n + j] ;
 		   adr = adr+BITFLIP ;
 		   q[i*n + j] = *(double *)adr ;
+                   printf("kernel-adi = %lf\n", q[i*n + j]);
 		}
       }
 

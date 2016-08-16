@@ -58,4 +58,14 @@ splot '47_simData_q.dat' using 1:2:3 ps 2 pt 3
 splot '48_simData_q.dat' using 1:2:3 ps 2 pt 3
 splot '49_simData_q.dat' using 1:2:3 ps 2 pt 3
 splot '50_simData_q.dat' using 1:2:3 ps 2 pt 3
+splot '51_simData_q.dat' using 1:2:3 ps 2 pt 3
+splot '52_simData_q.dat' using 1:2:3 ps 2 pt 3
+splot '53_simData_q.dat' using 1:2:3 ps 2 pt 3
+splot '54_simData_q.dat' using 1:2:3 ps 2 pt 3
+splot '55_simData_q.dat' using 1:2:3 ps 2 pt 3
+splot '56_simData_q.dat' using 1:2:3 ps 2 pt 3
+splot '57_simData_q.dat' using 1:2:3 ps 2 pt 3
+splot '58_simData_q.dat' using 1:2:3 ps 2 pt 3
+splot '59_simData_q.dat' using 1:2:3 ps 2 pt 3
+splot '60_simData_q.dat' using 1:2:3 ps 2 pt 3
 set output
