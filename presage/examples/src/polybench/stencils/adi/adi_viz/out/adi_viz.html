@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta name="generator" content="Madoko, version 1.0.2" />
+  <meta name="viewport" content="initial-scale=1.0" />
+  <title>PRESAGE Demo</title>
+  <style type="text/css"  class="link">
+  /*# sourceURL=madoko.css */
+  
+  .madoko .toc>.tocblock .tocblock .tocblock {
+    margin-left: 2.25em;
+  }
+  .madoko .toc>.tocblock .tocblock {
+    margin-left: 1.5em;
+  }
+  .madoko .toc-contents>.tocblock>.tocitem {
+    font-weight: bold;
+  }
+  .madoko .toc {
+    margin-top: 1em;
+  }
+  .madoko p.para-continue {
+    margin-bottom: 0pt;
+  }
+  .madoko .para-block+p {
+    margin-top: 0pt;
+  }
+  .madoko ul.para-block, .madoko ol.para-block {
+    margin-top: 0pt;
+    margin-bottom: 0pt;
+  }
+  .madoko ul.para-end, .madoko ol.para-end {
+    margin-bottom: 1em;
+  }
+  .madoko dl {
+    margin-left: 0em;
+  }
+  .madoko blockquote {
+    font-style: italic;
+  }
+  .madoko a.localref {
+    text-decoration: none;
+  }
+  .madoko a.localref:hover {
+    text-decoration: underline;
+  }
+  .madoko .footnotes {
+    font-size: smaller;
+    margin-top: 2em;
+  }
+  .madoko .footnotes hr {
+    width: 50%;
+    text-align: left;
+  }
+  .madoko .footnote { 
+    margin-left: 1em;
+  }
+  .madoko .footnote-before {
+    margin-left: -1em;
+    width: 1em;
+    display: inline-block;
+  }
+  .madoko .align-center, .madoko .align-center>p {
+    text-align: center !important;
+  }
+  .madoko .align-center pre {
+    text-align: left;
+  }
+  .madoko .align-center>* {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .madoko .align-left, .madoko .align-left>p {
+    text-align: left !important;
+  }
+  .madoko .align-left>* {
+    margin-left: 0pt !important;
+    margin-right: auto !important;
+  }
+  .madoko .align-right, .madoko .align-right>p {
+    text-align: right !important;
+  }
+  .madoko .align-right>* {
+    margin-left: auto !important;
+    margin-right: 0pt !important;
+  }
+  .madoko .align-center>table,
+  .madoko .align-left>table,
+  .madoko .align-right>table {
+    text-align: left !important;
+  }
+  .madoko .equation-before {
+    float: right;
+  }
+  .madoko .bibitem {
+    font-size: smaller;
+  }
+  .madoko .bibsearch {
+    font-size: x-small;
+    text-decoration:none;
+    color: black;
+    font-family: "Segoe UI Symbol", Symbola, serif;
+  }
+  .madoko .block, .madoko .figure, .madoko .bibitem, .madoko .equation, .madoko div.math {
+    margin-top: 1ex;
+    margin-bottom: 1ex;
+  }
+  .madoko .figure {
+    padding: 0.5em;
+    margin-left: 0pt;
+    margin-right: 0pt;
+  }
+  .madoko .hidden {
+    display: none;
+  }
+  .madoko .invisible {
+    visibility: hidden;
+  }
+  .madoko.preview .invisible {
+    visibility: visible;
+    opacity: 0.5;
+  }
+  .madoko code.code, .madoko span.code {
+    white-space: pre-wrap;
+  }
+  .madoko hr, hr.madoko {
+    border: none;
+    border-bottom: black solid 1px;
+    margin-bottom: 0.5ex;
+  }
+  .madoko .framed>*:first-child {
+    margin-top: 0pt;
+  }
+  .madoko .framed>*:last-child {
+    margin-bottom: 0pt;
+  }
+  .madoko ul.list-style-type-dash {
+      list-style-type: none !important;
+  }
+  .madoko ul.list-style-type-dash > li:before {
+      content: "\2013"; 
+      position: absolute;
+      margin-left: -1em; 
+  }
+  .madoko table.madoko {
+    border-collapse: collapse;
+  }
+  .madoko td, .madoko th {
+    padding: 0ex 0.5ex;
+    margin: 0pt;
+    vertical-align: top;
+  }
+  .madoko .cell-border-left {
+    border-left: 1px solid black;
+  }
+  .madoko .cell-border-right {
+    border-right: 1px solid black;
+  }
+  .madoko thead>tr:first-child>.cell-line,
+  .madoko tbody:first-child>tr:first-child>.cell-line {
+    border-top: 1px solid black;
+    border-bottom: none;
+  }
+  .madoko .cell-line, .madoko .cell-double-line {
+    border-bottom: 1px solid black;
+    border-top: none;
+  }
+  .madoko .cell-double-line {
+    border-top: 1px solid black;
+    padding-top: 1.5px !important;
+  }
+  .madoko .input-mathpre .MathJax_Display {
+    text-align: left !important;
+  }
+  .madoko div.input-mathpre {
+    text-align: left;
+    margin-top: 1.5ex;
+    margin-bottom: 1ex;
+  }
+  .madoko .math-rendering {
+    color: gray;
+  }
+  .madoko .mathdisplay {
+    text-align: center;
+  }
+  .madoko .pretty table {
+    border-collapse: collapse;
+  }
+  .madoko .pretty td {
+    padding: 0em;
+  }
+  .madoko .pretty td.empty {
+    min-width: 1.5ex;
+  }
+  .madoko .pretty td.expander {
+    width: 100em;
+  }
+  body.madoko, .madoko .serif {
+    font-family: Cambria,"Times New Roman","Liberation Serif","Times",serif;
+  }
+  .madoko .sans-serif {
+    font-family: "Calibri", "Optima", sans-serif;
+  }
+  .madoko .symbol {
+    font-family: "Segoe UI Symbol", Symbola, serif;
+  }
+  body.madoko {  
+    -webkit-text-size-adjust: 100%;       
+    text-rendering: optimizeLegibility;
+  }
+  body.madoko {
+    max-width: 88ex; 
+    margin: 1em auto;
+    padding: 0em 2em;  
+  }
+  body.preview.madoko {
+    padding: 0em 1em;
+  }
+  .madoko p {
+    text-align: justify;
+  }
+  .madoko h1, .madoko h2, .madoko h3, .madoko h4 { 
+    margin-top: 1.22em; 
+    margin-bottom: 1ex;
+  }
+  .madoko h1+p, .madoko h2+p, .madoko h3+p, .madoko h4+p, .madoko h5+p  { 
+    margin-top: 1ex;    
+  }
+  .madoko h5, .madoko h6 { 
+    margin-top: 1ex;
+    font-size: 1em;
+  }
+  .madoko h5 { 
+    margin-bottom: 0.5ex;
+  }
+  .madoko h5 + p {
+    margin-top: 0.5ex;
+  }
+  .madoko h6 { 
+    margin-bottom: 0pt;
+  }
+  .madoko h6 + p {
+    margin-top: 0pt;
+  }
+  .madoko pre, .madoko code, .madoko kbd, .madoko samp, .madoko tt, 
+  .madoko .monospace, .madoko .token-indent, .madoko .reveal pre, .madoko .reveal code, .madoko .email {
+    font-family: Consolas,"Andale Mono WT","Andale Mono",Lucida Console,Monaco,monospace,monospace;
+    font-size: 0.85em;
+  }
+  .madoko pre code, .madoko .token-indent {
+    font-size: 0.95em;
+  }
+  .madoko pre code {
+    font-family: inherit !important;
+  }
+  .madoko ol.linenums li {
+    background-color: white;
+    list-style-type: decimal;
+  }
+  .madoko .remote {
+    background-color: #F0FFF0;
+  }
+  .madoko .remote + * {
+    margin-top: 0pt;
+  }
+  @media print {
+    body.madoko {
+      font-size: 10pt;
+    }
+    @page {
+      margin: 1in 1.5in;
+    }
+  }
+  @media only screen and (max-device-width:1024px) {
+    body.madoko {
+      padding: 0em 0.5em;    
+    }
+    .madoko li {
+      text-align: left;
+    }
+  }
+  
+    </style>
+  
+  </head>
+<body class="madoko">
+
+<div class="body madoko" style="line-adjust:0">
+<style>
+    body.madoko {
+      max-width: 75pc;       
+    }   
+</style>
+
+
+
+
+<div class="titleblock align-center para-block" style="text-align:center;line-adjust:0">
+<div class="titleheader align-center" style="text-align:center;line-adjust:0">
+<div class="title para-block" style="font-size:xx-large;font-weight:bold;margin-bottom:0.5ex;line-adjust:0">PRESAGE Demo</div></div></div><h2 id="sec-overview" class="h1" data-heading-depth="1" style="display:block"><span class="heading-before"><span class="heading-label">1</span>.&#8194;</span>Overview</h2>
+<p class="p noindent"><a href="http://arxiv.org/abs/1606.08948">PRESAGE</a> (available on&nbsp;<a href="https://utahfmr.github.io/PRESAGE/">Github</a>) 
+is aimed at protecting structured address computations (SACs) against soft error induced bit-flips, and 
+is developed using&nbsp;<a href="http://llvm.org/">LLVM</a> compiler infrastructure. The underlying principle of PRESAGE is that maximizing 
+the flow of error helps in better error detection coverage at lower overhead. PRESAGE achieves it by 
+introducing dependency chains between instructions used for SACs at LLVM IR level.We demonstrate the efficacy of 
+PRESAGE by applying it on a publicly available implementation of Alternating Direction Implicit (ADI) kernel provided in 
+<a href="http://web.cse.ohio-state.edu/~pouchet/software/polybench/">PolyBench/C benchmark suite</a>. 
+The ADI kernel is used in simulations of physical problems such as heat conduction, diffusion equation, 
+etc.
+</p><h2 id="sec-adi-c-implementation" class="h1" data-heading-depth="1" style="display:block"><span class="heading-before"><span class="heading-label">2</span>.&#8194;</span>ADI C Implementation</h2><h3 id="sec-adi-kernel" class="h2" data-heading-depth="2" style="display:block"><span class="heading-before"><span class="heading-label">2.1</span>.&#8194;</span>ADI Kernel</h3>
+<pre class="para-block pre-fenced pre-fenced3 language-javascript lang-javascript javascript colorized" style="display:block"><code> <span style="color:blue">for</span> (t=<span class="constant" style="color:purple">1</span>; t&lt;=tsteps; t++) {
+    <span style="color:darkgreen">//Column Sweep</span>
+    <span style="color:blue">for</span> (i=<span class="constant" style="color:purple">1</span>; i&lt;n-<span class="constant" style="color:purple">1</span>; i++) {
+      v[i] = <span class="constant" style="color:purple">1.0</span>;
+      p[i*n] = <span class="constant" style="color:purple">0.0</span>;
+      q[i*n] = v[i];
+      <span style="color:blue">for</span> (j=<span class="constant" style="color:purple">1</span>; j&lt;n-<span class="constant" style="color:purple">1</span>; j++) {
+        p[i*n+j] = -c / (a*p[i*n+(j-<span class="constant" style="color:purple">1</span>)]+b);
+        q[i*n+j] = ( -d*u[j*n+(i-<span class="constant" style="color:purple">1</span>)]+(<span class="constant" style="color:purple">1.0</span>+<span class="constant" style="color:purple">2.0</span>*d)*u[j*n+i] - 
+                     f*u[j*n+(i+<span class="constant" style="color:purple">1</span>)]
+                     -a*q[i*n+(j-<span class="constant" style="color:purple">1</span>)])/(a*p[i*n+(j-<span class="constant" style="color:purple">1</span>)]+b );
+      }
+      
+      v[n*(n-<span class="constant" style="color:purple">1</span>)+i] = <span class="constant" style="color:purple">1.0</span>;
+      <span style="color:blue">for</span> (j=n-<span class="constant" style="color:purple">2</span>; j&gt;=<span class="constant" style="color:purple">1</span>; j--) {
+        v[j*n+i] = p[i*n+j] * v[(j+<span class="constant" style="color:purple">1</span>)*n+i] + q[i*n+j];
+      }
+    }
+
+    <span style="color:darkgreen">//Row Sweep</span>
+    <span style="color:blue">for</span> (i=<span class="constant" style="color:purple">1</span>; i&lt;n-<span class="constant" style="color:purple">1</span>; i++) {
+      u[i*n] = <span class="constant" style="color:purple">1.0</span>;
+      p[i*n] = <span class="constant" style="color:purple">0.0</span>;
+      q[i*n] = u[i*n];
+      <span style="color:blue">for</span> (j=<span class="constant" style="color:purple">1</span>; j&lt;n-<span class="constant" style="color:purple">1</span>; j++) {
+        p[i*n+j] = -f / (d*p[i*n+(j-<span class="constant" style="color:purple">1</span>)]+e);
+        q[i*n+j] = ( -a*v[(i-<span class="constant" style="color:purple">1</span>)*n+j]+(<span class="constant" style="color:purple">1.0</span>+<span class="constant" style="color:purple">2.0</span>*a)*v[i*n+j] 
+                     -c*v[(i+<span class="constant" style="color:purple">1</span>)*n+j]
+                     -d*q[i*n+(j-<span class="constant" style="color:purple">1</span>)])/(d*p[i*n+(j-<span class="constant" style="color:purple">1</span>)]+e );
+      }
+      u[i*n+(n-<span class="constant" style="color:purple">1</span>)] = <span class="constant" style="color:purple">1.0</span>;
+
+      <span style="color:blue">for</span> (j=n-<span class="constant" style="color:purple">2</span>; j&gt;=<span class="constant" style="color:purple">1</span>; j--) {
+            u[i*n+j] = p[i*n+j] * u[i*n+(j+<span class="constant" style="color:purple">1</span>)] + q[i*n+j];
+      }
+    }    </code></pre><h3 id="sec-initialization-routine" class="h2" data-heading-depth="2" style="display:block"><span class="heading-before"><span class="heading-label">2.2</span>.&#8194;</span>Initialization Routine</h3>
+<pre class="para-block pre-fenced pre-fenced3 language-javascript lang-javascript javascript colorized" style="display:block"><code><span style="color:darkgreen">/*</span><span style="color:darkgreen"> Array initialization. </span><span style="color:darkgreen">*/</span>
+<span style="color:blue">void</span> init_array (<span style="color:blue">int</span> n,<span style="color:blue">double</span> *u)
+{
+  <span style="color:blue">int</span> i, j;
+  srand(<span class="constant" style="color:purple">0</span>);
+  <span style="color:blue">for</span> (i = <span class="constant" style="color:purple">0</span>; i &lt; n; i++)
+    <span style="color:blue">for</span> (j = <span class="constant" style="color:purple">0</span>; j &lt; n; j++)
+      {
+        u[i*n+j] =  (<span style="color:blue">double</span>) rand(); 
+      }
+}</code></pre><h2 id="sec-visualizations" class="h1" data-heading-depth="1" style="display:block"><span class="heading-before"><span class="heading-label">3</span>.&#8194;</span>Visualizations</h2>
+<p class="p noindent">In order to demonstrate how PRESAGE maximizes the flow of errors affecting
+SACs in the ADI kernel, we first visualize the time evolution computational 
+data stored in 2d-grids during a fault-free execution using input parameters 
+described below. Given that the ADI kernel performs time-stepped computations 
+on four computational 2D-grids denoted by arrays u, v, p, and q, we visualize 
+the computational data pertaining to these grids.
+</p><h3 id="sec-experimental-details" class="h2" data-heading-depth="2" style="display:block"><span class="heading-before"><span class="heading-label">3.1</span>.&#8194;</span>Experimental Details</h3>
+<p class="p noindent">Input parameters and setup details are provided below:
+</p>
+<pre class="para-block pre-fenced pre-fenced3 language-javascript lang-javascript javascript colorized" style="display:block"><code>Time-steps: <span class="constant" style="color:purple">50</span>
+Grid size (<span style="color:blue">for</span> all <span class="constant" style="color:purple">2</span>d-grids u,v,p, and q): <span class="constant" style="color:purple">25</span>x25
+Operating System: Ubuntu <span class="constant" style="color:purple">16.04</span>
+CPU: Intel(R) Core(TM) i7-<span class="constant" style="color:purple">6700</span>HQ
+LLVM version: <span class="constant" style="color:purple">3.9</span></code></pre><h3 id="sec-time-evolution-of-computational-data-in-2d-grids" class="h2" data-heading-depth="2" style="display:block"><span class="heading-before"><span class="heading-label">3.2</span>.&#8194;</span>Time Evolution of Computational Data in 2D-Grids</h3>
+<p class="p noindent">Figure&nbsp;<a href="#fig-native" title="Time Evolution of Computational Data for Grids  u (top-left), v (top-right), p (bottom-left), and q." class="localref" style="target-element:figure"><span class="figure-label">1</span></a> shows the time evolution of the computational data stored
+in 2d-grids u, v, p, and q during a fault-free execution using the input parameters 
+described earlier.
+</p>
+<figure id="fig-native" class="figure floating align-center float" style="text-align:center;float-env:figure;float-name:Figure">
+<p class="p noindent">  <img src="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/native_u.gif" alt="native_u" data-path="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/native_u.gif" data-linkid="native_u" style="width:400px;vertical-align:middle"> <img src="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/native_v.gif" alt="native_v" data-path="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/native_v.gif" data-linkid="native_v" style="width:400px;vertical-align:middle">
+  <img src="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/native_p.gif" alt="native_p" data-path="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/native_p.gif" data-linkid="native_p" style="width:400px;vertical-align:middle"> <img src="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/native_q.gif" alt="native_q" data-path="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/native_q.gif" data-linkid="native_q" style="width:400px;vertical-align:middle">
+</p>
+<hr  class="figureline madoko" style="display:block">
+
+<div class="p noindent"><fig-caption class="figure-caption"><span class="caption-before"><strong class="strong-star2">Figure&#160;<span class="figure-label">1</span>.</strong>&#160;</span><span class="caption-text">Time Evolution of Computational Data for Grids  u (top-left), v (top-right), p (bottom-left), and q.</span></fig-caption></div></figure><h3 id="sec-presage-in-action" class="h2" data-heading-depth="2" style="display:block"><span class="heading-before"><span class="heading-label">3.3</span>.&#8194;</span>PRESAGE in Action!</h3>
+<p class="p noindent">Next, we perform two independent set of fault injection experiments on the native and the 
+PRESAGE-transformed versions of the ADI kernel respectively using the same setup and input parameters 
+described earlier. The first experiment-set comprises a fault-free and a faulty execution on the 
+native version of the ADI kernel where as the second experiment-set consists of a fault-free and a 
+faulty execution on the PRESAGE-transformed version of the ADI kernel. The fault injection profile 
+chosen for both the experiment-sets targets the address of the element with coordinates (12,12) of 
+the grid <strong class="strong-star2">q</strong> during 25th time-step for fault injection by flipping its 5th bit from LSB.
+</p>
+<p class="p indent">Figure&nbsp;<a href="#fig-psg" title="Time Evolution of Differential Computational Data for Grid q using Native (Left) and PRESAGE-transformed (Right) versions of the ADI Kernel." class="localref" style="target-element:figure"><span class="figure-label">2</span></a> plots the differential computational data obtained by subtracting the values stored in
+the grid q during a fault-free execution from their corresponding values observed during the faulty execution
+in both the experiment sets. The l.h.s. of Figure&nbsp;<a href="#fig-psg" title="Time Evolution of Differential Computational Data for Grid q using Native (Left) and PRESAGE-transformed (Right) versions of the ADI Kernel." class="localref" style="target-element:figure"><span class="figure-label">2</span></a> refers to the experiment-set pertaining
+to the native version of ADI kernel where as the r.h.s. refers to the PRESAGE-transformed one. Clearly, 
+due to PRESAGE enabling the flow of errors, we can observe a significantly higher number of elements
+getting silently corrupted in the r.h.s as compared to the l.h.s. of Figure&nbsp;<a href="#fig-psg" title="Time Evolution of Differential Computational Data for Grid q using Native (Left) and PRESAGE-transformed (Right) versions of the ADI Kernel." class="localref" style="target-element:figure"><span class="figure-label">2</span></a>. 
+</p>
+<figure id="fig-psg" class="figure floating align-center float" style="text-align:center;float-env:figure;float-name:Figure">
+<p class="p noindent"> <img src="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/dnf.gif" alt="dnf" data-path="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/dnf.gif" data-linkid="dnf" style="width:400px;vertical-align:middle"> <img src="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/dnp.gif" alt="dnp" data-path="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/dnp.gif" data-linkid="dnp" style="width:400px;vertical-align:middle">
+</p>
+<hr  class="figureline madoko" style="display:block">
+
+<div class="p noindent"><fig-caption class="figure-caption"><span class="caption-before"><strong class="strong-star2">Figure&#160;<span class="figure-label">2</span>.</strong>&#160;</span><span class="caption-text">Time Evolution of Differential Computational Data for Grid q using Native (Left) and PRESAGE-transformed (Right) versions of the ADI Kernel.</span></fig-caption></div></figure><h2 id="sec-coverage-metrics" class="h1" data-heading-depth="1" style="display:block"><span class="heading-before"><span class="heading-label">4</span>.&#8194;</span>Coverage Metrics</h2><h3 id="sec-luleshhttps-codesignllnlgovluleshphp-doe-mini-application" class="h2" data-heading-depth="2" style="display:block"><span class="heading-before"><span class="heading-label">4.1</span>.&#8194;</span><a href="https://codesign.llnl.gov/lulesh.php">LULESH</a> DOE Mini Application</h3>
+<pre class="para-block pre-fenced pre-fenced3 language-javascript lang-javascript javascript colorized" style="display:block"><code>Average % Dynamic Instruction Coverage Provided by PRESAGE under Error Model I: <span class="constant" style="color:purple">18.49</span> %
+Average % Dynamic Instruction Coverage Provided by PRESAGE under Error Model II: <span class="constant" style="color:purple">18.40</span> %
+% Static Instruction Coverage Provided by PRESAGE under Error Model I: <span class="constant" style="color:purple">19.63</span> %
+% Static Instruction Coverage Provided by PRESAGE under Error Model II: <span class="constant" style="color:purple">28.09</span> %</code></pre>
+<p class="p noindent para-continued"><img src="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/luleshCov.png" alt="lulcov" data-path="http://www.cs.utah.edu/~vinu/research/stencils/presage/presage_results/vizs/barc/luleshCov.png" data-linkid="lulcov" style="width:55pc;vertical-align:middle">
+</p><table class="madoko block">
+<thead><tr><th class="col thead tr-odd tr-last tr-first col-odd col-first" data-row="1" data-col="1" style="font-weight:bold"> Problem Size     </th><th class="col thead tr-odd tr-last tr-first col-even" data-row="1" data-col="2" style="font-weight:bold"> Total DIC I     </th><th class="col thead tr-odd tr-last tr-first col-odd" data-row="1" data-col="3" style="font-weight:bold"> DIC EM I     </th><th class="col thead tr-odd tr-last tr-first col-even" data-row="1" data-col="4" style="font-weight:bold"> % Coverage EM I     </th><th class="col thead tr-odd tr-last tr-first col-odd" data-row="1" data-col="5" style="font-weight:bold"> DIC EM II     </th><th class="col thead tr-odd tr-last tr-first col-even" data-row="1" data-col="6" style="font-weight:bold"> % Coverage EM II     </th><th class="col thead tr-odd tr-last tr-first col-odd col-last" data-row="1" data-col="7" style="font-weight:bold"> % Total Coverage     </th></tr></thead>
+<tbody><tr><td class="tbody tr-even col cell-line col-odd col-first" data-row="0" data-col="1"></td><td class="tbody tr-even col cell-line col-even" data-row="0" data-col="2"></td><td class="tbody tr-even col cell-line col-odd" data-row="0" data-col="3"></td><td class="tbody tr-even col cell-line col-even" data-row="0" data-col="4"></td><td class="tbody tr-even col cell-line col-odd" data-row="0" data-col="5"></td><td class="tbody tr-even col cell-line col-even" data-row="0" data-col="6"></td><td class="tbody tr-even col cell-line col-odd col-last" data-row="0" data-col="7"></td></tr>
+<tr><td class="tbody tr-odd tr-first col col-odd col-first" data-row="1" data-col="1"> 8                </td><td class="tbody tr-odd tr-first col col-even" data-row="1" data-col="2"> 169090          </td><td class="tbody tr-odd tr-first col col-odd" data-row="1" data-col="3"> 30022        </td><td class="tbody tr-odd tr-first col col-even" data-row="1" data-col="4"> 17.755042           </td><td class="tbody tr-odd tr-first col col-odd" data-row="1" data-col="5"> 30181         </td><td class="tbody tr-odd tr-first col col-even" data-row="1" data-col="6"> 17.849074            </td><td class="tbody tr-odd tr-first col col-odd col-last" data-row="1" data-col="7"> 35.604116            </td></tr>
+<tr><td class="tbody tr-even col col-odd col-first" data-row="2" data-col="1"> 12               </td><td class="tbody tr-even col col-even" data-row="2" data-col="2"> 547509          </td><td class="tbody tr-even col col-odd" data-row="2" data-col="3"> 99809        </td><td class="tbody tr-even col col-even" data-row="2" data-col="4"> 18.229655           </td><td class="tbody tr-even col col-odd" data-row="2" data-col="5"> 99789         </td><td class="tbody tr-even col col-even" data-row="2" data-col="6"> 18.226002            </td><td class="tbody tr-even col col-odd col-last" data-row="2" data-col="7"> 36.455656            </td></tr>
+<tr><td class="tbody tr-odd col col-odd col-first" data-row="3" data-col="1"> 16               </td><td class="tbody tr-odd col col-even" data-row="3" data-col="2"> 1276530         </td><td class="tbody tr-odd col col-odd" data-row="3" data-col="3"> 234932       </td><td class="tbody tr-odd col col-even" data-row="3" data-col="4"> 18.403954           </td><td class="tbody tr-odd col col-odd" data-row="3" data-col="5"> 234359        </td><td class="tbody tr-odd col col-even" data-row="3" data-col="6"> 18.359067            </td><td class="tbody tr-odd col col-odd col-last" data-row="3" data-col="7"> 36.763022            </td></tr>
+<tr><td class="tbody tr-even col col-odd col-first" data-row="4" data-col="1"> 20               </td><td class="tbody tr-even col col-even" data-row="4" data-col="2"> 2470786         </td><td class="tbody tr-even col col-odd" data-row="4" data-col="3"> 456991       </td><td class="tbody tr-even col col-even" data-row="4" data-col="4"> 18.495774           </td><td class="tbody tr-even col col-odd" data-row="4" data-col="5"> 455239        </td><td class="tbody tr-even col col-even" data-row="4" data-col="6"> 18.424866            </td><td class="tbody tr-even col col-odd col-last" data-row="4" data-col="7"> 36.92064             </td></tr>
+<tr><td class="tbody tr-odd col col-odd col-first" data-row="5" data-col="1"> 24               </td><td class="tbody tr-odd col col-even" data-row="5" data-col="2"> 4248049         </td><td class="tbody tr-odd col col-odd" data-row="5" data-col="3"> 787586       </td><td class="tbody tr-odd col col-even" data-row="5" data-col="4"> 18.539946           </td><td class="tbody tr-odd col col-odd" data-row="5" data-col="5"> 783913        </td><td class="tbody tr-odd col col-even" data-row="5" data-col="6"> 18.453483            </td><td class="tbody tr-odd col col-odd col-last" data-row="5" data-col="7"> 36.993429            </td></tr>
+<tr><td class="tbody tr-even col col-odd col-first" data-row="6" data-col="1"> 28               </td><td class="tbody tr-even col col-even" data-row="6" data-col="2"> 6724658         </td><td class="tbody tr-even col col-odd" data-row="6" data-col="3"> 1248317      </td><td class="tbody tr-even col col-even" data-row="6" data-col="4"> 18.563279           </td><td class="tbody tr-even col col-odd" data-row="6" data-col="5"> 1241697       </td><td class="tbody tr-even col col-even" data-row="6" data-col="6"> 18.464835            </td><td class="tbody tr-even col col-odd col-last" data-row="6" data-col="7"> 37.028114            </td></tr>
+<tr><td class="tbody tr-odd col col-odd col-first" data-row="7" data-col="1"> 32               </td><td class="tbody tr-odd col col-even" data-row="7" data-col="2"> 10016902        </td><td class="tbody tr-odd col col-odd" data-row="7" data-col="3"> 1860784      </td><td class="tbody tr-odd col col-even" data-row="7" data-col="4"> 18.576442           </td><td class="tbody tr-odd col col-odd" data-row="7" data-col="5"> 1850107       </td><td class="tbody tr-odd col col-even" data-row="7" data-col="6"> 18.469852            </td><td class="tbody tr-odd col col-odd col-last" data-row="7" data-col="7"> 37.046294            </td></tr>
+<tr><td class="tbody tr-even col col-odd col-first" data-row="8" data-col="1"> 36               </td><td class="tbody tr-even col col-even" data-row="8" data-col="2"> 14240894        </td><td class="tbody tr-even col col-odd" data-row="8" data-col="3"> 2646587      </td><td class="tbody tr-even col col-even" data-row="8" data-col="4"> 18.584416           </td><td class="tbody tr-even col col-odd" data-row="8" data-col="5"> 2630427       </td><td class="tbody tr-even col col-even" data-row="8" data-col="6"> 18.47094             </td><td class="tbody tr-even col col-odd col-last" data-row="8" data-col="7"> 37.055356            </td></tr>
+<tr><td class="tbody tr-odd col col-odd col-first" data-row="9" data-col="1"> 40               </td><td class="tbody tr-odd col col-even" data-row="9" data-col="2"> 19513007        </td><td class="tbody tr-odd col col-odd" data-row="9" data-col="3"> 3627326      </td><td class="tbody tr-odd col col-even" data-row="9" data-col="4"> 18.589272           </td><td class="tbody tr-odd col col-odd" data-row="9" data-col="5"> 3604205       </td><td class="tbody tr-odd col col-even" data-row="9" data-col="6"> 18.470782            </td><td class="tbody tr-odd col col-odd col-last" data-row="9" data-col="7"> 37.060054            </td></tr>
+<tr><td class="tbody tr-even col col-odd col-first" data-row="10" data-col="1"> 44               </td><td class="tbody tr-even col col-even" data-row="10" data-col="2"> 25949140        </td><td class="tbody tr-even col col-odd" data-row="10" data-col="3"> 4824601      </td><td class="tbody tr-even col col-even" data-row="10" data-col="4"> 18.592528           </td><td class="tbody tr-even col col-odd" data-row="10" data-col="5"> 4792693       </td><td class="tbody tr-even col col-even" data-row="10" data-col="6"> 18.469564            </td><td class="tbody tr-even col col-odd col-last" data-row="10" data-col="7"> 37.062091            </td></tr>
+<tr><td class="tbody tr-odd col col-odd col-first" data-row="11" data-col="1"> 48               </td><td class="tbody tr-odd col col-even" data-row="11" data-col="2"> 33665818        </td><td class="tbody tr-odd col col-odd" data-row="11" data-col="3"> 6260012      </td><td class="tbody tr-odd col col-even" data-row="11" data-col="4"> 18.594564           </td><td class="tbody tr-odd col col-odd" data-row="11" data-col="5"> 6217471       </td><td class="tbody tr-odd col col-even" data-row="11" data-col="6"> 18.468201            </td><td class="tbody tr-odd col col-odd col-last" data-row="11" data-col="7"> 37.062765            </td></tr>
+<tr><td class="tbody tr-even col col-odd col-first" data-row="12" data-col="1"> 52               </td><td class="tbody tr-even col col-even" data-row="12" data-col="2"> 42778939        </td><td class="tbody tr-even col col-odd" data-row="12" data-col="3"> 7955159      </td><td class="tbody tr-even col col-even" data-row="12" data-col="4"> 18.595971           </td><td class="tbody tr-even col col-odd" data-row="12" data-col="5"> 7899759       </td><td class="tbody tr-even col col-even" data-row="12" data-col="6"> 18.466468            </td><td class="tbody tr-even col col-odd col-last" data-row="12" data-col="7"> 37.062439            </td></tr>
+<tr><td class="tbody tr-odd col col-odd col-first" data-row="13" data-col="1"> 56               </td><td class="tbody tr-odd col col-even" data-row="13" data-col="2"> 53404957        </td><td class="tbody tr-odd col col-odd" data-row="13" data-col="3"> 9931642      </td><td class="tbody tr-odd col col-even" data-row="13" data-col="4"> 18.596854           </td><td class="tbody tr-odd col col-odd" data-row="13" data-col="5"> 9861169       </td><td class="tbody tr-odd col col-even" data-row="13" data-col="6"> 18.464895            </td><td class="tbody tr-odd col col-odd col-last" data-row="13" data-col="7"> 37.061749            </td></tr>
+<tr><td class="tbody tr-even col col-odd col-first" data-row="14" data-col="1"> 60               </td><td class="tbody tr-even col col-even" data-row="14" data-col="2"> 65659794        </td><td class="tbody tr-even col col-odd" data-row="14" data-col="3"> 12211061     </td><td class="tbody tr-even col col-even" data-row="14" data-col="4"> 18.597471           </td><td class="tbody tr-even col col-odd" data-row="14" data-col="5"> 12122889      </td><td class="tbody tr-even col col-even" data-row="14" data-col="6"> 18.463185            </td><td class="tbody tr-even col col-odd col-last" data-row="14" data-col="7"> 37.060655            </td></tr>
+<tr><td class="tbody tr-odd tr-last col col-odd col-first" data-row="15" data-col="1"> 64               </td><td class="tbody tr-odd tr-last col col-even" data-row="15" data-col="2"> 79659935        </td><td class="tbody tr-odd tr-last col col-odd" data-row="15" data-col="3"> 14815016     </td><td class="tbody tr-odd tr-last col col-even" data-row="15" data-col="4"> 18.597826           </td><td class="tbody tr-odd tr-last col col-odd" data-row="15" data-col="5"> 14706563      </td><td class="tbody tr-odd tr-last col col-even" data-row="15" data-col="6"> 18.461681            </td><td class="tbody tr-odd tr-last col col-odd col-last" data-row="15" data-col="7"> 37.059507            </td></tr></tbody></table><span data-line=""></span></div>
+</body>
+
+</html>
