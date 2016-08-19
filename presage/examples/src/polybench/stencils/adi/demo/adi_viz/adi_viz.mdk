@@ -141,7 +141,7 @@ getting silently corrupted in the r.h.s as compared to the l.h.s. of Figure [#fi
 
 # Metrics
 
-## `LULESH` [DOE Mini Application [@LULESH2:changes]
+## LULESH DOE Mini Application [@LULESH2:changes]
 
 ---
 | problem_size | total_DIC | DIC_EM1  | % Coverage EM1 | DIC_EM2  | % Coverage EM2 | % Total Coverage | Total SIC | SIC EM1 | % Coverage EM1 | SIC EM2 | % Coverage EM2 | % Total Coverage |
